@@ -36,6 +36,16 @@ outerWrapper.appendChild(innerWrapper);
 innerWrapper.appendChild(unfinishedUl);
 innerWrapper.appendChild(finishedUl);
 
+for (let i = 0; i < unfinishedItems.length; i++) {
+  const itemName = document.createElement("h2");
+  const itemDescription = document.createElement("p");
+  const itemImage = document.createElement("img");
 
-for (let i = 0; i < unfinishedItems.length; i++) {}
+  itemName.innerHTML = unfinishedItems[i].name
+  itemDescription.innerHTML = unfinishedItems[i].description
 
+  finishedUl.appendChild(listItem)
+  listItem.appendChild(itemName);
+  listItem.appendChild(itemDescription);
+  listItem.appendChild(itemImage);
+}

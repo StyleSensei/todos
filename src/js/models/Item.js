@@ -1,4 +1,4 @@
-export class UnfinishedItem {
+export class Item {
     name;
     description;
     image;
