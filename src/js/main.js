@@ -39,13 +39,18 @@ innerWrapper.appendChild(finishedUl);
 for (let i = 0; i < unfinishedItems.length; i++) {
   const itemName = document.createElement("h2");
   const itemDescription = document.createElement("p");
+  const imageContainer = document.createElement("figure")
   const itemImage = document.createElement("img");
 
   itemName.innerHTML = unfinishedItems[i].name
   itemDescription.innerHTML = unfinishedItems[i].description
+  imageContainer.classList.add("imagecontainer")
+  itemImage.setAttribute("src",unfinishedItems[i].image)
+  itemImage.setAttribute("alt", unfinishedItems[i].name + " " + "i min inköpslista")
 
   finishedUl.appendChild(listItem)
   listItem.appendChild(itemName);
   listItem.appendChild(itemDescription);
-  listItem.appendChild(itemImage);
+  listItem.appendChild(imageContainer);
+  imageContainer.appendChild(itemImage);
 }

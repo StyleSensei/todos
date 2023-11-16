@@ -1,3 +1,27 @@
-body{
-    // background-color: black;
+// reset
+*, :before, :after{
+    box-sizing: border-box;  
+    margin: 0;
+    padding: 0;
+}
+$itemwidth:80%;
+
+
+.innerwrapper{
+    display: grid;
+}
+.listitem{
+   width: $itemwidth; 
+}
+
+.imagecontainer{
+// width: $itemwidth;
+height: calc($itemwidth * .3);
+object-fit: cover;
+overflow: hidden;
+border-radius: 50px;
+
+}
+img{
+    width: 100%;
 }
