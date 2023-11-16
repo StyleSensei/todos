@@ -17,4 +17,25 @@ const meatballs = new Item(
   "https://shared.cdn.smp.schibsted.com/v2/images/1bbc6e72-1efb-4846-8465-46f7a29553fe?fit=crop&h=846&w=1225&s=545dd735fabb69929b29483983b5b6d86106a2b8"
 );
 
+const unfinishedItems = [salmon, chocolate, meatballs];
+
+const outerWrapper = document.createElement("div");
+const innerWrapper = document.createElement("div");
+const unfinishedUl = document.createElement("ul");
+const finishedUl = document.createElement("ul");
+const listItem = document.createElement("section");
+
+outerWrapper.classList.add("outerwrapper");
+innerWrapper.classList.add("outerwrapper");
+unfinishedUl.classList.add("unfinishedlist");
+finishedUl.classList.add("finishedlist");
+listItem.classList.add("listitem");
+
+document.body.appendChild(outerWrapper);
+outerWrapper.appendChild(innerWrapper);
+innerWrapper.appendChild(unfinishedUl);
+innerWrapper.appendChild(finishedUl);
+
+
+for (let i = 0; i < unfinishedItems.length; i++) {}
 
