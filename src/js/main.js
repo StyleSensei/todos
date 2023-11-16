@@ -1,6 +1,7 @@
 import { Item } from "./models/Item";
 import "/src/scss/style.scss";
 
+
 const salmon = new Item(
   "Lax",
   "Kallrökt",
@@ -30,19 +31,42 @@ const innerWrapper = document.createElement("div");
 const unfinishedUl = document.createElement("ul");
 const finishedUl = document.createElement("ul");
 const header = document.createElement("h1");
+const oldItemsHeader = document.createElement("h2")
+
+function createForm(){
 const form = document.createElement("form");
 const inputName = document.createElement("input");
+const inputDescription = document.createElement("input");
+const addItemBtn = document.createElement("button")
+
+addItemBtn.innerHTML = "Lägg till vara"
+form.classList.add("input-group", "flex-nowrap","container", "container")
+inputName.classList.add("form-control")
+inputDescription.classList.add("form-control")
+addItemBtn.classList.add("btn","btn-primary")
+
+
+innerWrapper.appendChild(form)
+form.appendChild(inputName)
+form.appendChild(inputDescription)
+form.appendChild(addItemBtn)
+
+
+
+}
 
 outerWrapper.classList.add("outerwrapper");
 innerWrapper.classList.add("outerwrapper");
 unfinishedUl.classList.add("unfinishedlist");
 finishedUl.classList.add("finishedlist");
 header.innerHTML = "Inköpslista";
+oldItemsHeader.innerHTML = "Tidigare varor"
 
 document.body.appendChild(outerWrapper);
 outerWrapper.appendChild(header);
 outerWrapper.appendChild(innerWrapper);
 innerWrapper.appendChild(unfinishedUl);
+innerWrapper.appendChild(oldItemsHeader);
 innerWrapper.appendChild(finishedUl);
 
 function createHtmlUnfinished() {
@@ -124,5 +148,6 @@ function createHtmlOldItems() {
 
 createHtmlUnfinished();
 createHtmlOldItems();
+createForm()
 console.log(unfinishedItems);
 console.log(oldItems);
