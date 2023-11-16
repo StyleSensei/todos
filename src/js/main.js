@@ -19,7 +19,7 @@ const meatballs = new Item(
 const shrimps = new Item(
   "Räkor",
   "frysta skalade",
-  "https://shared.cdn.smp.schibsted.com/v2/images/1bbc6e72-1efb-4846-8465-46f7a29553fe?fit=crop&h=846&w=1225&s=545dd735fabb69929b29483983b5b6d86106a2b8"
+  "https://jhb.se/storage/4A9116E87029D56C4B0F72CC452F549AF3BE7AC5D0C2DC7298ED1EBDCD5B0266/6cfae06e69da4f2ea3ffc5516ad4cfa5/jpg/media/a7ba02476ab04fd9b8b316494f5c94a8/handskalade%20räkor.jpg"
 );
 
 const unfinishedItems = [salmon, chocolate, meatballs];
@@ -103,10 +103,11 @@ function createHtmlOldItems() {
 
     listItem.addEventListener("click", () => {
       oldItems.splice(i, 1);
-      unfinishedUl.innerHTML = "";
+      finishedUl.innerHTML = "";
       createHtmlOldItems();
       unfinishedItems.push(item);
       unfinishedUl.innerHTML = "";
+      createHtmlUnfinished()
 
       console.log(unfinishedItems);
       console.log(oldItems);
