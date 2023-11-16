@@ -16,41 +16,112 @@ const meatballs = new Item(
   "1kg svenska",
   "https://shared.cdn.smp.schibsted.com/v2/images/1bbc6e72-1efb-4846-8465-46f7a29553fe?fit=crop&h=846&w=1225&s=545dd735fabb69929b29483983b5b6d86106a2b8"
 );
+const shrimps = new Item(
+  "Räkor",
+  "frysta skalade",
+  "https://shared.cdn.smp.schibsted.com/v2/images/1bbc6e72-1efb-4846-8465-46f7a29553fe?fit=crop&h=846&w=1225&s=545dd735fabb69929b29483983b5b6d86106a2b8"
+);
 
 const unfinishedItems = [salmon, chocolate, meatballs];
+const oldItems = [shrimps];
 
 const outerWrapper = document.createElement("div");
 const innerWrapper = document.createElement("div");
 const unfinishedUl = document.createElement("ul");
 const finishedUl = document.createElement("ul");
-const listItem = document.createElement("section");
+const header = document.createElement("h1");
+const form = document.createElement("form");
+const inputName = document.createElement("input");
 
 outerWrapper.classList.add("outerwrapper");
 innerWrapper.classList.add("outerwrapper");
 unfinishedUl.classList.add("unfinishedlist");
 finishedUl.classList.add("finishedlist");
-listItem.classList.add("listitem");
+header.innerHTML = "Inköpslista";
 
 document.body.appendChild(outerWrapper);
+outerWrapper.appendChild(header);
 outerWrapper.appendChild(innerWrapper);
 innerWrapper.appendChild(unfinishedUl);
 innerWrapper.appendChild(finishedUl);
 
-for (let i = 0; i < unfinishedItems.length; i++) {
-  const itemName = document.createElement("h2");
-  const itemDescription = document.createElement("p");
-  const imageContainer = document.createElement("figure")
-  const itemImage = document.createElement("img");
+function createHtmlUnfinished() {
+  unfinishedItems.forEach((item, i) => {
+    const textWrapper = document.createElement("section");
+    const listItem = document.createElement("li");
+    const itemName = document.createElement("h2");
+    const itemDescription = document.createElement("p");
+    const imageContainer = document.createElement("figure");
+    const itemImage = document.createElement("img");
 
-  itemName.innerHTML = unfinishedItems[i].name
-  itemDescription.innerHTML = unfinishedItems[i].description
-  imageContainer.classList.add("imagecontainer")
-  itemImage.setAttribute("src",unfinishedItems[i].image)
-  itemImage.setAttribute("alt", unfinishedItems[i].name + " " + "i min inköpslista")
+    listItem.classList.add("listitem");
+    itemName.innerHTML = item.name;
+    itemDescription.innerHTML = item.description;
+    textWrapper.classList.add("listitem__textwrapper");
+    imageContainer.classList.add("listitem__imagecontainer");
+    itemImage.setAttribute("src", item.image);
+    itemImage.setAttribute("alt", item.name + " " + "i min inköpslista");
 
-  finishedUl.appendChild(listItem)
-  listItem.appendChild(itemName);
-  listItem.appendChild(itemDescription);
-  listItem.appendChild(imageContainer);
-  imageContainer.appendChild(itemImage);
+    listItem.addEventListener("click", () => {
+      unfinishedItems.splice(i, 1);
+      unfinishedUl.innerHTML = "";
+      createHtmlUnfinished();
+      oldItems.push(item);
+      finishedUl.innerHTML = "";
+      createHtmlOldItems();
+      console.log(unfinishedItems);
+      console.log(oldItems);
+    });
+
+    unfinishedUl.appendChild(listItem);
+    listItem.appendChild(imageContainer);
+    imageContainer.appendChild(itemImage);
+    listItem.appendChild(textWrapper);
+    textWrapper.appendChild(itemName);
+    textWrapper.appendChild(itemDescription);
+  });
 }
+
+function createHtmlOldItems() {
+  // console.log(oldItems)
+
+  oldItems.forEach((item, i) => {
+    const textWrapper = document.createElement("section");
+    const listItem = document.createElement("li");
+    const itemName = document.createElement("h2");
+    const itemDescription = document.createElement("p");
+    const imageContainer = document.createElement("figure");
+    const itemImage = document.createElement("img");
+
+    listItem.classList.add("listitem--old");
+    textWrapper.classList.add("listitem__textwrapper");
+    imageContainer.classList.add("listitem__imagecontainer");
+    itemName.innerHTML = item.name;
+    itemDescription.innerHTML = item.description;
+    itemImage.setAttribute("src", item.image);
+    itemImage.setAttribute("alt", item.name + " " + "i min inköpslista");
+
+    listItem.addEventListener("click", () => {
+      oldItems.splice(i, 1);
+      unfinishedUl.innerHTML = "";
+      createHtmlOldItems();
+      unfinishedItems.push(item);
+      unfinishedUl.innerHTML = "";
+
+      console.log(unfinishedItems);
+      console.log(oldItems);
+    });
+
+    finishedUl.appendChild(listItem);
+    listItem.appendChild(imageContainer);
+    imageContainer.appendChild(itemImage);
+    listItem.appendChild(textWrapper);
+    textWrapper.appendChild(itemName);
+    textWrapper.appendChild(itemDescription);
+  });
+}
+
+createHtmlUnfinished();
+createHtmlOldItems();
+console.log(unfinishedItems);
+console.log(oldItems);
