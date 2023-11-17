@@ -47,6 +47,8 @@ const sortBtn = document.createElement("button");
 
 function createForm() {
   const form = document.createElement("form");
+  const inputContainer = document.createElement("fieldset")
+  const inputContainer2 = document.createElement("fieldset")
   const inputName = document.createElement("input");
   const inputNameLabel = document.createElement("label");
   const inputDescriptionLabel = document.createElement("label");
@@ -61,31 +63,37 @@ function createForm() {
 
   addItemBtn.innerHTML = "Lägg till vara";
   //css-classes
-  form.classList.add("row", "g-3", "col-12", "col-sm-6");
-  inputName.classList.add("col-4");
+  form.classList.add("row", "g-3", "col-12", "col-md-6","col-lg-5","col-xxl-4","needs-validation");
+  inputContainer.classList.add("form-floating","col-6")
+  inputContainer2.classList.add("form-floating","col-6")
+  inputName.classList.add("col-4","form-control");
   inputNameLabel.classList.add("col-sm-2","col-form-label","col-form-label-lg")
-  inputDescription.classList.add("col-4");
-  addItemBtn.classList.add("btn", "btn-primary");
+  inputDescription.classList.add("col-4","form-control");
+  addItemBtn.classList.add("btn", "btn-primary","col");
   inputDescriptionLabel.classList.add("col-sm-2","col-form-label","col-form-label-lg")
 
   inputName.setAttribute("placeholder", "Vara");
   inputName.setAttribute("name", "name");
   inputName.id = "name";
+  inputName.setAttribute("required","")
   inputNameLabel.setAttribute("for", "name");
   inputNameLabel.innerHTML = "Vara";
   inputDescription.setAttribute("placeholder", "Beskrivning");
   inputDescription.id = "description";
   inputDescriptionLabel.setAttribute("for", "description");
   inputDescriptionLabel.innerHTML = "Beskrivning";
+  addItemBtn.setAttribute("type","submit")
 
   footer.appendChild(form);
-  form.appendChild(inputNameLabel);
-  form.appendChild(inputName);
-  form.appendChild(inputDescriptionLabel);
-  form.appendChild(inputDescription);
+  form.appendChild(inputContainer)
+  inputContainer.appendChild(inputName);
+  inputContainer.appendChild(inputNameLabel);
+  form.appendChild(inputContainer2)
+  inputContainer2.appendChild(inputDescription);
+  inputContainer2.appendChild(inputDescriptionLabel);
   form.appendChild(addItemBtn);
 
-  addItemBtn.addEventListener("click", (e) => {
+  form.addEventListener("submit", (e) => {
     e.preventDefault();
     userInputName = inputName.value;
     userInputDescription = inputDescription.value;
@@ -94,16 +102,40 @@ function createForm() {
     unfinishedUl.innerHTML = "";
     createHtmlUnfinished();
   });
+  
 }
 
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function () {
+    'use strict'
+  
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.querySelectorAll('.needs-validation')
+  
+    // Loop over them and prevent submission
+    Array.prototype.slice.call(forms)
+      .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+  
+          form.classList.add('was-validated')
+        }, false)
+      })
+  })()
+
+
 outerWrapper.classList.add("outerwrapper");
-innerWrapper.classList.add("outerwrapper");
+innerWrapper.classList.add("innerwrapper");
 unfinishedUl.classList.add("unfinishedlist");
 finishedUl.classList.add("finishedlist");
 heading.innerHTML = "Inköpslista";
 sortBtn.classList.add("btn", "btn-primary","btn-primary--sort");
 sortBtn.innerHTML = "ABC";
 oldItemsHeader.innerHTML = "Tidigare varor";
+oldItemsHeader.classList.add("olditemsheader")
 
 document.body.appendChild(outerWrapper);
 outerWrapper.appendChild(innerWrapper);
