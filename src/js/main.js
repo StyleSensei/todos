@@ -31,6 +31,8 @@ const unfinishedUl = document.createElement("ul");
 const finishedUl = document.createElement("ul");
 const header = document.createElement("h1");
 const oldItemsHeader = document.createElement("h2");
+const sortBtn = document.createElement("button")
+sortBtn.classList.add("btn")
 
 function createForm() {
   const form = document.createElement("form");
@@ -75,7 +77,7 @@ function createForm() {
 
     unfinishedItems.push(new Item(userInputName, userInputDescription));
     unfinishedUl.innerHTML = "";
-    createHtmlUnfinished()
+    createHtmlUnfinished();
   });
 }
 
@@ -169,9 +171,40 @@ function createHtmlOldItems() {
     textWrapper.appendChild(itemDescription);
   });
 }
+function sort() {
+//   console.log(
+//     unfinishedItems.sort(function (item1, item2) {
+//       if (item1.name < item2.name) {
+//         return -1;
+//       }
+//       if (item1.name > item2.name) {
+//         return 1;
+//       }
+//       return 0;
+//     })
+//   );
+
+  unfinishedItems.sort(function (item1, item2) {
+    if (item1.name < item2.name) {
+      return -1;
+    }
+    if (item1.name > item2.name) {
+      return 1;
+    }
+    return 0;
+  });
+
+
+  unfinishedUl.innerHTML = ""
+createHtmlUnfinished()
+}
 
 createHtmlUnfinished();
 createHtmlOldItems();
 createForm();
+sort();
+
+
+
 console.log(unfinishedItems);
 console.log(oldItems);
