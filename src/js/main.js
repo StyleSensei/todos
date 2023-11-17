@@ -37,10 +37,13 @@ const outerWrapper = document.createElement("div");
 const innerWrapper = document.createElement("div");
 const unfinishedUl = document.createElement("ul");
 const finishedUl = document.createElement("ul");
-const header = document.createElement("h1");
+const heading = document.createElement("h1");
+const header = document.createElement("header")
+const main = document.createElement("main")
+const footer = document.createElement("footer")
 const oldItemsHeader = document.createElement("h2");
 const sortBtn = document.createElement("button");
-sortBtn.classList.add("btn", "btn-primary");
+
 
 function createForm() {
   const form = document.createElement("form");
@@ -75,7 +78,7 @@ function createForm() {
   inputDescriptionLabel.setAttribute("for", "description");
   inputDescriptionLabel.innerHTML = "Beskrivning";
 
-  innerWrapper.appendChild(form);
+  footer.appendChild(form);
   form.appendChild(inputNameLabel);
   form.appendChild(inputName);
   form.appendChild(inputDescriptionLabel);
@@ -97,17 +100,21 @@ outerWrapper.classList.add("outerwrapper");
 innerWrapper.classList.add("outerwrapper");
 unfinishedUl.classList.add("unfinishedlist");
 finishedUl.classList.add("finishedlist");
-header.innerHTML = "Inköpslista";
+heading.innerHTML = "Inköpslista";
+sortBtn.classList.add("btn", "btn-primary","btn-primary--sort");
 sortBtn.innerHTML = "ABC";
 oldItemsHeader.innerHTML = "Tidigare varor";
 
 document.body.appendChild(outerWrapper);
-outerWrapper.appendChild(header);
-outerWrapper.appendChild(sortBtn);
 outerWrapper.appendChild(innerWrapper);
-innerWrapper.appendChild(unfinishedUl);
-innerWrapper.appendChild(oldItemsHeader);
-innerWrapper.appendChild(finishedUl);
+innerWrapper.appendChild(header);
+innerWrapper.appendChild(main);
+innerWrapper.appendChild(footer);
+header.appendChild(heading)
+main.appendChild(sortBtn)
+main.appendChild(unfinishedUl);
+main.appendChild(oldItemsHeader);
+main.appendChild(finishedUl);
 
 function createHtmlUnfinished() {
   localStorage.setItem("unfinishedItems", JSON.stringify(unfinishedItems));

@@ -10,6 +10,8 @@ p,
 }
 $itemwidth: 100%;
 $imgsize: 5rem;
+$btn-border-radius: 20px;
+$btn-padding: 1rem 2rem;
 
 @mixin tablet {
   @media screen and (min-width: 768px) {
@@ -33,23 +35,36 @@ body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   color: whitesmoke;
 }
-.outerwrapper {
+header {
   height: 10vh;
+  margin-bottom: 2rem;
   h1 {
     padding: 0.8rem;
     @include tablet{
-        
+        padding: 4vw 4vw;
     }
   }
 }
+.btn-primary{
+border-radius: $btn-border-radius;
+padding: $btn-padding;
+&--sort{
+margin-left: .8rem;
+@include tablet{
+    margin: 1vw 4vw;
+}
+}
 
+}
 .innerwrapper {
   display: grid;
 }
+
+
 ul {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+//   grid-template-rows: 1fr 1fr 1fr;
   flex-wrap: wrap;
   gap: 10px;
   padding: 0.8rem;
@@ -112,4 +127,9 @@ ul {
       display: flex;
     }
   }
+}
+footer{
+    bottom: 0;
+    position: sticky;
+    background-color: #303f47;
 }
