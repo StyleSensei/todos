@@ -31,8 +31,8 @@ const unfinishedUl = document.createElement("ul");
 const finishedUl = document.createElement("ul");
 const header = document.createElement("h1");
 const oldItemsHeader = document.createElement("h2");
-const sortBtn = document.createElement("button")
-sortBtn.classList.add("btn")
+const sortBtn = document.createElement("button");
+sortBtn.classList.add("btn", "btn-primary");
 
 function createForm() {
   const form = document.createElement("form");
@@ -86,10 +86,12 @@ innerWrapper.classList.add("outerwrapper");
 unfinishedUl.classList.add("unfinishedlist");
 finishedUl.classList.add("finishedlist");
 header.innerHTML = "Inköpslista";
+sortBtn.innerHTML = "ABC";
 oldItemsHeader.innerHTML = "Tidigare varor";
 
 document.body.appendChild(outerWrapper);
 outerWrapper.appendChild(header);
+outerWrapper.appendChild(sortBtn);
 outerWrapper.appendChild(innerWrapper);
 innerWrapper.appendChild(unfinishedUl);
 innerWrapper.appendChild(oldItemsHeader);
@@ -171,18 +173,18 @@ function createHtmlOldItems() {
     textWrapper.appendChild(itemDescription);
   });
 }
-function sort() {
-//   console.log(
-//     unfinishedItems.sort(function (item1, item2) {
-//       if (item1.name < item2.name) {
-//         return -1;
-//       }
-//       if (item1.name > item2.name) {
-//         return 1;
-//       }
-//       return 0;
-//     })
-//   );
+function sortUnfinished() {
+  //   console.log(
+  //     unfinishedItems.sort(function (item1, item2) {
+  //       if (item1.name < item2.name) {
+  //         return -1;
+  //       }
+  //       if (item1.name > item2.name) {
+  //         return 1;
+  //       }
+  //       return 0;
+  //     })
+  //   );
 
   unfinishedItems.sort(function (item1, item2) {
     if (item1.name < item2.name) {
@@ -194,17 +196,14 @@ function sort() {
     return 0;
   });
 
-
-  unfinishedUl.innerHTML = ""
-createHtmlUnfinished()
+  unfinishedUl.innerHTML = "";
+  createHtmlUnfinished();
 }
+sortBtn.addEventListener("click", () => sortUnfinished());
 
 createHtmlUnfinished();
 createHtmlOldItems();
 createForm();
-sort();
-
-
 
 console.log(unfinishedItems);
 console.log(oldItems);
