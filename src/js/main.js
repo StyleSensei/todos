@@ -58,10 +58,12 @@ function createForm() {
 
   addItemBtn.innerHTML = "Lägg till vara";
   //css-classes
-  form.classList.add("input-group", "flex-nowrap", "container", "container");
-  inputName.classList.add("form-control");
-  inputDescription.classList.add("form-control");
+  form.classList.add("row", "g-3", "col-12", "col-sm-6");
+  inputName.classList.add("col-4");
+  inputNameLabel.classList.add("col-sm-2","col-form-label","col-form-label-lg")
+  inputDescription.classList.add("col-4");
   addItemBtn.classList.add("btn", "btn-primary");
+  inputDescriptionLabel.classList.add("col-sm-2","col-form-label","col-form-label-lg")
 
   inputName.setAttribute("placeholder", "Vara");
   inputName.setAttribute("name", "name");
