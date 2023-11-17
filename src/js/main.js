@@ -25,10 +25,12 @@ const shrimps = new Item(
 let unfinishedItems = [salmon, chocolate, meatballs];
 let oldItems = [shrimps];
 
-if(localStorage.getItem("unfinishedItems") && localStorage.getItem("oldItems")){
-unfinishedItems = JSON.parse(localStorage.getItem("unfinishedItems"))
-oldItems = JSON.parse(localStorage.getItem("oldItems"))
-
+if (
+  localStorage.getItem("unfinishedItems") &&
+  localStorage.getItem("oldItems")
+) {
+  unfinishedItems = JSON.parse(localStorage.getItem("unfinishedItems"));
+  oldItems = JSON.parse(localStorage.getItem("oldItems"));
 }
 
 const outerWrapper = document.createElement("div");
@@ -55,10 +57,12 @@ function createForm() {
   inputDescription.value = "";
 
   addItemBtn.innerHTML = "Lägg till vara";
+  //css-classes
   form.classList.add("input-group", "flex-nowrap", "container", "container");
   inputName.classList.add("form-control");
   inputDescription.classList.add("form-control");
   addItemBtn.classList.add("btn", "btn-primary");
+
   inputName.setAttribute("placeholder", "Vara");
   inputName.setAttribute("name", "name");
   inputName.id = "name";
@@ -104,7 +108,7 @@ innerWrapper.appendChild(oldItemsHeader);
 innerWrapper.appendChild(finishedUl);
 
 function createHtmlUnfinished() {
-    localStorage.setItem("unfinishedItems", JSON.stringify(unfinishedItems));
+  localStorage.setItem("unfinishedItems", JSON.stringify(unfinishedItems));
 
   unfinishedItems.forEach((item, i) => {
     const textWrapper = document.createElement("section");
@@ -114,7 +118,7 @@ function createHtmlUnfinished() {
     const imageContainer = document.createElement("figure");
     const itemImage = document.createElement("img");
 
-    listItem.classList.add("listitem");
+    listItem.classList.add("listitem", "container");
     itemName.innerHTML = item.name;
     itemDescription.innerHTML = item.description;
     textWrapper.classList.add("listitem__textwrapper");
@@ -143,7 +147,7 @@ function createHtmlUnfinished() {
 }
 
 function createHtmlOldItems() {
-    localStorage.setItem("oldItems", JSON.stringify(oldItems))
+  localStorage.setItem("oldItems", JSON.stringify(oldItems));
   // console.log(oldItems)
 
   oldItems.forEach((item, i) => {
