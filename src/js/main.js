@@ -22,8 +22,14 @@ const shrimps = new Item(
   "https://jhb.se/storage/4A9116E87029D56C4B0F72CC452F549AF3BE7AC5D0C2DC7298ED1EBDCD5B0266/6cfae06e69da4f2ea3ffc5516ad4cfa5/jpg/media/a7ba02476ab04fd9b8b316494f5c94a8/handskalade%20räkor.jpg"
 );
 
-const unfinishedItems = [salmon, chocolate, meatballs];
-const oldItems = [shrimps];
+let unfinishedItems = [salmon, chocolate, meatballs];
+let oldItems = [shrimps];
+
+if(localStorage.getItem("unfinishedItems") && localStorage.getItem("oldItems")){
+unfinishedItems = JSON.parse(localStorage.getItem("unfinishedItems"))
+oldItems = JSON.parse(localStorage.getItem("oldItems"))
+
+}
 
 const outerWrapper = document.createElement("div");
 const innerWrapper = document.createElement("div");
@@ -98,6 +104,8 @@ innerWrapper.appendChild(oldItemsHeader);
 innerWrapper.appendChild(finishedUl);
 
 function createHtmlUnfinished() {
+    localStorage.setItem("unfinishedItems", JSON.stringify(unfinishedItems));
+
   unfinishedItems.forEach((item, i) => {
     const textWrapper = document.createElement("section");
     const listItem = document.createElement("li");
@@ -135,6 +143,7 @@ function createHtmlUnfinished() {
 }
 
 function createHtmlOldItems() {
+    localStorage.setItem("oldItems", JSON.stringify(oldItems))
   // console.log(oldItems)
 
   oldItems.forEach((item, i) => {
