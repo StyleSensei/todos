@@ -1,7 +1,6 @@
 import { Item } from "./models/Item";
 import "/src/scss/style.scss";
 
-
 const salmon = new Item(
   "Lax",
   "Kallrökt",
@@ -31,28 +30,53 @@ const innerWrapper = document.createElement("div");
 const unfinishedUl = document.createElement("ul");
 const finishedUl = document.createElement("ul");
 const header = document.createElement("h1");
-const oldItemsHeader = document.createElement("h2")
+const oldItemsHeader = document.createElement("h2");
 
-function createForm(){
-const form = document.createElement("form");
-const inputName = document.createElement("input");
-const inputDescription = document.createElement("input");
-const addItemBtn = document.createElement("button")
+function createForm() {
+  const form = document.createElement("form");
+  const inputName = document.createElement("input");
+  const inputNameLabel = document.createElement("label");
+  const inputDescriptionLabel = document.createElement("label");
+  const inputDescription = document.createElement("input");
+  const addItemBtn = document.createElement("button");
 
-addItemBtn.innerHTML = "Lägg till vara"
-form.classList.add("input-group", "flex-nowrap","container", "container")
-inputName.classList.add("form-control")
-inputDescription.classList.add("form-control")
-addItemBtn.classList.add("btn","btn-primary")
+  let userInputName = "";
+  let userInputDescription = "";
 
+  inputName.value = "";
+  inputDescription.value = "";
 
-innerWrapper.appendChild(form)
-form.appendChild(inputName)
-form.appendChild(inputDescription)
-form.appendChild(addItemBtn)
+  addItemBtn.innerHTML = "Lägg till vara";
+  form.classList.add("input-group", "flex-nowrap", "container", "container");
+  inputName.classList.add("form-control");
+  inputDescription.classList.add("form-control");
+  addItemBtn.classList.add("btn", "btn-primary");
+  inputName.setAttribute("placeholder", "Vara");
+  inputName.setAttribute("name", "name");
+  inputName.id = "name";
+  inputNameLabel.setAttribute("for", "name");
+  inputNameLabel.innerHTML = "Vara";
+  inputDescription.setAttribute("placeholder", "Beskrivning");
+  inputDescription.id = "description";
+  inputDescriptionLabel.setAttribute("for", "description");
+  inputDescriptionLabel.innerHTML = "Beskrivning";
 
+  innerWrapper.appendChild(form);
+  form.appendChild(inputNameLabel);
+  form.appendChild(inputName);
+  form.appendChild(inputDescriptionLabel);
+  form.appendChild(inputDescription);
+  form.appendChild(addItemBtn);
 
+  addItemBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    userInputName = inputName.value;
+    userInputDescription = inputDescription.value;
 
+    unfinishedItems.push(new Item(userInputName, userInputDescription));
+    unfinishedUl.innerHTML = "";
+    createHtmlUnfinished()
+  });
 }
 
 outerWrapper.classList.add("outerwrapper");
@@ -60,7 +84,7 @@ innerWrapper.classList.add("outerwrapper");
 unfinishedUl.classList.add("unfinishedlist");
 finishedUl.classList.add("finishedlist");
 header.innerHTML = "Inköpslista";
-oldItemsHeader.innerHTML = "Tidigare varor"
+oldItemsHeader.innerHTML = "Tidigare varor";
 
 document.body.appendChild(outerWrapper);
 outerWrapper.appendChild(header);
@@ -131,7 +155,7 @@ function createHtmlOldItems() {
       createHtmlOldItems();
       unfinishedItems.push(item);
       unfinishedUl.innerHTML = "";
-      createHtmlUnfinished()
+      createHtmlUnfinished();
 
       console.log(unfinishedItems);
       console.log(oldItems);
@@ -148,6 +172,6 @@ function createHtmlOldItems() {
 
 createHtmlUnfinished();
 createHtmlOldItems();
-createForm()
+createForm();
 console.log(unfinishedItems);
 console.log(oldItems);
