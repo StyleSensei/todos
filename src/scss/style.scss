@@ -12,7 +12,7 @@ p,
 $itemwidth: 100%;
 $imgsize: 5rem;
 $btn-border-radius: 5px;
-$btn-padding: .5rem 1rem;
+$btn-padding: 0.5rem 1rem;
 
 @mixin tablet {
   @media screen and (min-width: 768px) {
@@ -29,16 +29,30 @@ $btn-padding: .5rem 1rem;
     @content;
   }
 }
+@mixin afterOldItem {
+  color: whitesmoke;
+  border: whitesmoke solid 1px;
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  position: relative;
+  justify-self: end;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  height: 5rem;
+  width: 5rem;
+  overflow: hidden;
+}
 
 body {
   background-color: #303f47;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   color: whitesmoke;
   height: 100vh;
-//   max-width: 100vw;
+  //   max-width: 100vw;
   overflow-x: hidden;
   padding: 1.25rem;
-  margin:0 auto;
+  margin: 0 auto;
 }
 header {
   height: 5vh;
@@ -55,18 +69,24 @@ header {
   padding: $btn-padding;
   &--sort {
     margin-left: 0.8rem;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    &:after {
+      content: url(src/sort_FILL0_wght400_GRAD0_opsz24.svg);
+    }
     @include tablet {
       margin: 1vw 4vw;
     }
   }
 }
-.outerwrapper{
-    height: 100vh;
+.outerwrapper {
+  height: 100vh;
 }
 .innerwrapper {
-    // display: -webkit-grid;
+  // display: -webkit-grid;
   display: grid;
-    height: 100vh;
+  height: 100vh;
 }
 
 ul {
@@ -93,14 +113,14 @@ ul {
 .unfinishedlist {
   margin-bottom: 4rem;
 }
-.olditemsheader{
-    margin:.8rem;
-    @include tablet {
-        margin:4vw 4vw;
-      }
-
+.olditemsheader {
+  margin: 0.8rem;
+  @include tablet {
+    margin: 4vw 4vw;
+  }
 }
 .listitem {
+  cursor: pointer;
   display: grid;
   grid-template-columns: 6rem 1fr 2fr;
   grid-template-rows: 7rem;
@@ -111,9 +131,27 @@ ul {
   border-radius: 10px;
   padding: 0.5rem 1rem;
   place-items: center;
+  transition: all ease-in-out 0.3s;
+  &:hover {
+    background-color: #c8585c;
+  }
   &__imagecontainer {
     height: $imgsize;
     margin: 0;
+    &--noimage {
+      position: relative;
+      font-weight: 900;
+      font-family:fantasy;
+      top:5%;
+      justify-content: center;
+      align-items: center;
+      left: -1rem;
+      font-size: 3rem;
+      @include tablet(){
+        font-size: 4rem;
+      }
+
+    }
   }
   img {
     width: $imgsize;
@@ -130,15 +168,16 @@ ul {
     background-color: rgba(0, 0, 0, 0.2);
     filter: grayscale(1);
     border: dashed 3px;
+    transition: all 0.3s ease-in-out;
+    &:hover {
+      &:after {
+        content: url(/src/add_FILL0_wght400_GRAD0_opsz24.svg) "Köp";
+        @include afterOldItem();
+      }
+    }
     &:after {
       content: url(src/done_FILL0_wght400_GRAD0_opsz24.svg) "Klar";
-      color: whitesmoke;
-      border: whitesmoke solid 1px;
-      border-radius: 20px;
-      padding: 0.5rem 1rem;
-      position: relative;
-      justify-self: end;
-      display: flex;
+      @include afterOldItem();
     }
   }
 }
@@ -147,30 +186,38 @@ footer {
   padding: 1rem;
   position: sticky;
   background-color: #303f47;
-  border-top:solid 1px #45535a;
+  border-top: solid 1px #45535a;
   display: -webkit-box;
   display: flex;
   justify-content: center;
   align-items: center;
-  
-    form{
-        // max-width: 90%;
-        .form-floating.form-control{
-            padding: 1rem .75rem;
-            height: calc(3.5rem + 2px);
-            // line-height: 1.25;
-            font-size: 1rem;
-            input{
-                font-size: 1rem!important
-            }
-        }
-        .form-floating>label{
-            color: #303f47;
-            padding:1rem 1.25rem;
-            opacity: 0.65;
-            top:-.2rem
 
-        }
-    }
+  align-items: flex-end;
+  height: 4rem;
+  overflow: hidden;
+  margin-bottom: -4rem;
+  transition: all .3s ease-in-out;
  
+
+  form {
+    // max-width: 90%;
+    .form-floating.form-control {
+      padding: 1rem 0.75rem;
+      height: calc(3.5rem + 2px);
+      // line-height: 1.25;
+      font-size: 1rem;
+      input {
+        font-size: 1rem !important;
+      }
+    }
+    .form-floating > label {
+      color: #303f47;
+      padding: 1rem 1.25rem;
+      opacity: 0.65;
+      top: -0.2rem;
+    }
+  }
+}
+.toggleform{
+  height: 10rem;
 }

@@ -38,17 +38,16 @@ const innerWrapper = document.createElement("div");
 const unfinishedUl = document.createElement("ul");
 const finishedUl = document.createElement("ul");
 const heading = document.createElement("h1");
-const header = document.createElement("header")
-const main = document.createElement("main")
-const footer = document.createElement("footer")
+const header = document.createElement("header");
+const main = document.createElement("main");
+const footer = document.createElement("footer");
 const oldItemsHeader = document.createElement("h2");
 const sortBtn = document.createElement("button");
 
-
 function createForm() {
   const form = document.createElement("form");
-  const inputContainer = document.createElement("fieldset")
-  const inputContainer2 = document.createElement("fieldset")
+  const inputContainer = document.createElement("fieldset");
+  const inputContainer2 = document.createElement("fieldset");
   const inputName = document.createElement("input");
   const inputNameLabel = document.createElement("label");
   const inputDescriptionLabel = document.createElement("label");
@@ -63,32 +62,48 @@ function createForm() {
 
   addItemBtn.innerHTML = "Lägg till vara";
   //css-classes
-  form.classList.add("row", "g-3", "col-12", "col-md-6","col-lg-5","col-xxl-4","needs-validation");
-  inputContainer.classList.add("form-floating","col-6")
-  inputContainer2.classList.add("form-floating","col-6")
-  inputName.classList.add("col-4","form-control");
-  inputNameLabel.classList.add("col-sm-2","col-form-label","col-form-label-lg")
-  inputDescription.classList.add("col-4","form-control");
-  addItemBtn.classList.add("btn", "btn-primary","col");
-  inputDescriptionLabel.classList.add("col-sm-2","col-form-label","col-form-label-lg")
+  form.classList.add(
+    "row",
+    "g-3",
+    "col-12",
+    "col-md-6",
+    "col-lg-5",
+    "col-xxl-4",
+    "needs-validation"
+  );
+  inputContainer.classList.add("form-floating", "col-6");
+  inputContainer2.classList.add("form-floating", "col-6");
+  inputName.classList.add("col-4", "form-control");
+  inputNameLabel.classList.add(
+    "col-sm-2",
+    "col-form-label",
+    "col-form-label-lg"
+  );
+  inputDescription.classList.add("col-4", "form-control");
+  addItemBtn.classList.add("btn", "btn-primary", "col");
+  inputDescriptionLabel.classList.add(
+    "col-sm-2",
+    "col-form-label",
+    "col-form-label-lg"
+  );
 
   inputName.setAttribute("placeholder", "Vara");
   inputName.setAttribute("name", "name");
   inputName.id = "name";
-  inputName.setAttribute("required","")
+  inputName.setAttribute("required", "");
   inputNameLabel.setAttribute("for", "name");
   inputNameLabel.innerHTML = "Vara";
   inputDescription.setAttribute("placeholder", "Beskrivning");
   inputDescription.id = "description";
   inputDescriptionLabel.setAttribute("for", "description");
   inputDescriptionLabel.innerHTML = "Beskrivning";
-  addItemBtn.setAttribute("type","submit")
+  addItemBtn.setAttribute("type", "submit");
 
   footer.appendChild(form);
-  form.appendChild(inputContainer)
+  form.appendChild(inputContainer);
   inputContainer.appendChild(inputName);
   inputContainer.appendChild(inputNameLabel);
-  form.appendChild(inputContainer2)
+  form.appendChild(inputContainer2);
   inputContainer2.appendChild(inputDescription);
   inputContainer2.appendChild(inputDescriptionLabel);
   form.appendChild(addItemBtn);
@@ -102,48 +117,37 @@ function createForm() {
     unfinishedUl.innerHTML = "";
     createHtmlUnfinished();
   });
-  
+  footer.addEventListener("mouseenter", () =>{
+    footer.classList.toggle("toggleform")
+  })
+  footer.addEventListener("mouseleave", () =>{
+    footer.classList.toggle("toggleform")
+  })
+  footer.addEventListener("click", () =>{
+    footer.classList.toggle("toggleform")
+  })
+  footer.addEventListener("click", () =>{
+    footer.classList.toggle("toggleform")
+  })
 }
-
-// Example starter JavaScript for disabling form submissions if there are invalid fields
-(function () {
-    'use strict'
-  
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    var forms = document.querySelectorAll('.needs-validation')
-  
-    // Loop over them and prevent submission
-    Array.prototype.slice.call(forms)
-      .forEach(function (form) {
-        form.addEventListener('submit', function (event) {
-          if (!form.checkValidity()) {
-            event.preventDefault()
-            event.stopPropagation()
-          }
-  
-          form.classList.add('was-validated')
-        }, false)
-      })
-  })()
-
 
 outerWrapper.classList.add("outerwrapper");
 innerWrapper.classList.add("innerwrapper");
 unfinishedUl.classList.add("unfinishedlist");
 finishedUl.classList.add("finishedlist");
 heading.innerHTML = "Inköpslista";
-sortBtn.classList.add("btn", "btn-primary","btn-primary--sort");
-sortBtn.innerHTML = "ABC";
+sortBtn.classList.add("btn", "btn-primary", "btn-primary--sort");
+sortBtn.innerHTML = "Sortera";
 oldItemsHeader.innerHTML = "Tidigare varor";
-oldItemsHeader.classList.add("olditemsheader")
+oldItemsHeader.classList.add("olditemsheader");
 
 document.body.appendChild(outerWrapper);
 outerWrapper.appendChild(innerWrapper);
 innerWrapper.appendChild(header);
 innerWrapper.appendChild(main);
 innerWrapper.appendChild(footer);
-header.appendChild(heading)
-main.appendChild(sortBtn)
+header.appendChild(heading);
+main.appendChild(sortBtn);
 main.appendChild(unfinishedUl);
 main.appendChild(oldItemsHeader);
 main.appendChild(finishedUl);
@@ -184,6 +188,11 @@ function createHtmlUnfinished() {
     listItem.appendChild(textWrapper);
     textWrapper.appendChild(itemName);
     textWrapper.appendChild(itemDescription);
+
+    if (item.image === undefined) {
+      imageContainer.innerHTML = item.name[0];
+      imageContainer.classList.add("listitem__imagecontainer--noimage");
+    }
   });
 }
 
@@ -225,6 +234,11 @@ function createHtmlOldItems() {
     listItem.appendChild(textWrapper);
     textWrapper.appendChild(itemName);
     textWrapper.appendChild(itemDescription);
+
+    if (item.image === undefined) {
+      imageContainer.innerHTML = item.name[0];
+      imageContainer.classList.add("listitem__imagecontainer--noimage");
+    }
   });
 }
 function sortUnfinished() {
