@@ -4,22 +4,26 @@ import "/src/scss/style.scss";
 const salmon = new Item(
   "Lax",
   "Kallrökt",
-  "https://brobergsmat.se/wp-content/uploads/2016/11/kallröktlaxw.jpg"
+  "https://brobergsmat.se/wp-content/uploads/2016/11/kallröktlaxw.jpg",
+  false
 );
 const chocolate = new Item(
   "Chocklad",
   "2 x marabou 200g",
-  "https://www.professionalsecrets.se/uploads/1/3/3/9/133935227/published/shutterchoklad-258868484.jpg?1618923947"
+  "https://www.professionalsecrets.se/uploads/1/3/3/9/133935227/published/shutterchoklad-258868484.jpg?1618923947",
+  false
 );
 const meatballs = new Item(
   "Köttbullar",
   "1kg svenska",
-  "https://shared.cdn.smp.schibsted.com/v2/images/1bbc6e72-1efb-4846-8465-46f7a29553fe?fit=crop&h=846&w=1225&s=545dd735fabb69929b29483983b5b6d86106a2b8"
+  "https://shared.cdn.smp.schibsted.com/v2/images/1bbc6e72-1efb-4846-8465-46f7a29553fe?fit=crop&h=846&w=1225&s=545dd735fabb69929b29483983b5b6d86106a2b8",
+  false
 );
 const shrimps = new Item(
   "Räkor",
   "frysta skalade",
-  "https://jhb.se/storage/4A9116E87029D56C4B0F72CC452F549AF3BE7AC5D0C2DC7298ED1EBDCD5B0266/6cfae06e69da4f2ea3ffc5516ad4cfa5/jpg/media/a7ba02476ab04fd9b8b316494f5c94a8/handskalade%20räkor.jpg"
+  "https://jhb.se/storage/4A9116E87029D56C4B0F72CC452F549AF3BE7AC5D0C2DC7298ED1EBDCD5B0266/6cfae06e69da4f2ea3ffc5516ad4cfa5/jpg/media/a7ba02476ab04fd9b8b316494f5c94a8/handskalade%20räkor.jpg",
+  true
 );
 
 let unfinishedItems = [salmon, chocolate, meatballs];
@@ -43,6 +47,7 @@ const main = document.createElement("main");
 const footer = document.createElement("footer");
 const oldItemsHeader = document.createElement("h2");
 const sortBtn = document.createElement("button");
+const overlay = document.createElement("div");
 
 function createForm() {
   const form = document.createElement("form");
@@ -71,28 +76,29 @@ function createForm() {
     "col-xxl-4",
     "needs-validation"
   );
-  inputContainer.classList.add("form-floating", "col-6");
-  inputContainer2.classList.add("form-floating", "col-6");
+  inputContainer.classList.add("form-floating", "col-10");
+  inputContainer2.classList.add("form-floating", "col-10");
   inputName.classList.add("col-4", "form-control");
   inputNameLabel.classList.add(
-    "col-sm-2",
+    "col-sm-10",
     "col-form-label",
     "col-form-label-lg"
   );
-  inputDescription.classList.add("col-4", "form-control");
-  addItemBtn.classList.add("btn", "btn-primary", "col");
+  inputDescription.classList.add("col-10", "form-control");
+  addItemBtn.classList.add("btn", "btn-primary", "btn-primary--add", "col-10");
   inputDescriptionLabel.classList.add(
-    "col-sm-2",
+    "col-sm-10",
     "col-form-label",
     "col-form-label-lg"
   );
+  overlay.classList.add("overlay");
 
   inputName.setAttribute("placeholder", "Vara");
   inputName.setAttribute("name", "name");
   inputName.id = "name";
   inputName.setAttribute("required", "");
   inputNameLabel.setAttribute("for", "name");
-  inputNameLabel.innerHTML = "Vara";
+  inputNameLabel.innerHTML = "Jag behöver ...";
   inputDescription.setAttribute("placeholder", "Beskrivning");
   inputDescription.id = "description";
   inputDescriptionLabel.setAttribute("for", "description");
@@ -115,20 +121,35 @@ function createForm() {
 
     unfinishedItems.push(new Item(userInputName, userInputDescription));
     unfinishedUl.innerHTML = "";
+    inputName.value = "";
+    inputDescription.value = "";
     createHtmlUnfinished();
   });
-  footer.addEventListener("mouseenter", () =>{
-    footer.classList.toggle("toggleform")
-  })
-  footer.addEventListener("mouseleave", () =>{
-    footer.classList.toggle("toggleform")
-  })
-  footer.addEventListener("click", () =>{
-    footer.classList.toggle("toggleform")
-  })
-  footer.addEventListener("click", () =>{
-    footer.classList.toggle("toggleform")
-  })
+  footer.addEventListener("mouseenter", () => {
+    footer.classList.toggle("toggleform");
+    overlay.classList.toggle("overlay--show");
+  });
+  footer.addEventListener("mouseleave", () => {
+    footer.classList.toggle("toggleform");
+    overlay.classList.toggle("overlay--show");
+  });
+
+  inputContainer.addEventListener("touchstart", () => {
+    
+    footer.classList.add("toggleform");
+    overlay.classList.add("overlay--show");
+  });
+  inputContainer2.addEventListener("touchstart", () => {
+    footer.classList.add("toggleform");
+    overlay.classList.add("overlay--show");
+  });
+  
+
+  footer.addEventListener("touchstart", () => {
+    footer.classList.toggle("toggleform");
+    overlay.classList.toggle("overlay--show");
+  });
+ 
 }
 
 outerWrapper.classList.add("outerwrapper");
@@ -141,6 +162,7 @@ sortBtn.innerHTML = "Sortera";
 oldItemsHeader.innerHTML = "Tidigare varor";
 oldItemsHeader.classList.add("olditemsheader");
 
+document.body.appendChild(overlay);
 document.body.appendChild(outerWrapper);
 outerWrapper.appendChild(innerWrapper);
 innerWrapper.appendChild(header);
@@ -172,14 +194,18 @@ function createHtmlUnfinished() {
     itemImage.setAttribute("alt", item.name + " " + "i min inköpslista");
 
     listItem.addEventListener("click", () => {
-      unfinishedItems.splice(i, 1);
-      unfinishedUl.innerHTML = "";
-      createHtmlUnfinished();
-      oldItems.push(item);
-      finishedUl.innerHTML = "";
-      createHtmlOldItems();
-      console.log(unfinishedItems);
-      console.log(oldItems);
+      if (!overlay.classList.contains("overlay--show"));
+      {
+        item.done = true;
+        unfinishedItems.splice(i, 1);
+        unfinishedUl.innerHTML = "";
+        createHtmlUnfinished();
+        oldItems.push(item);
+        finishedUl.innerHTML = "";
+        createHtmlOldItems();
+        console.log(unfinishedItems);
+        console.log(oldItems);
+      }
     });
 
     unfinishedUl.appendChild(listItem);
@@ -194,6 +220,7 @@ function createHtmlUnfinished() {
       imageContainer.classList.add("listitem__imagecontainer--noimage");
     }
   });
+  console.log(unfinishedItems);
 }
 
 function createHtmlOldItems() {
@@ -217,6 +244,8 @@ function createHtmlOldItems() {
     itemImage.setAttribute("alt", item.name + " " + "i min inköpslista");
 
     listItem.addEventListener("click", () => {
+      if (!overlay.classList.contains("overlay--show")){
+      item.done = false;
       oldItems.splice(i, 1);
       finishedUl.innerHTML = "";
       createHtmlOldItems();
@@ -226,6 +255,7 @@ function createHtmlOldItems() {
 
       console.log(unfinishedItems);
       console.log(oldItems);
+      }
     });
 
     finishedUl.appendChild(listItem);
@@ -241,7 +271,7 @@ function createHtmlOldItems() {
     }
   });
 }
-function sortUnfinished() {
+function sortAllItems() {
   //   console.log(
   //     unfinishedItems.sort(function (item1, item2) {
   //       if (item1.name < item2.name) {
@@ -253,8 +283,17 @@ function sortUnfinished() {
   //       return 0;
   //     })
   //   );
-
+  if (!overlay.classList.contains("overlay--show")){
   unfinishedItems.sort(function (item1, item2) {
+    if (item1.name < item2.name) {
+      return -1;
+    }
+    if (item1.name > item2.name) {
+      return 1;
+    }
+    return 0;
+  });
+  oldItems.sort(function (item1, item2) {
     if (item1.name < item2.name) {
       return -1;
     }
@@ -266,8 +305,10 @@ function sortUnfinished() {
 
   unfinishedUl.innerHTML = "";
   createHtmlUnfinished();
-}
-sortBtn.addEventListener("click", () => sortUnfinished());
+  finishedUl.innerHTML = "";
+  createHtmlOldItems();
+}}
+sortBtn.addEventListener("click", () => sortAllItems());
 
 createHtmlUnfinished();
 createHtmlOldItems();
