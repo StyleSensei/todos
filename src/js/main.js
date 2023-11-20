@@ -74,20 +74,20 @@ function createForm() {
     "g-3",
     "col-12",
     "col-md-6",
-    "col-lg-5",
-    "col-xxl-4",
+    "col-lg-12",
+    "col-xxl-12",
     "needs-validation"
   );
-  inputContainer.classList.add("form-floating", "col-10");
-  inputContainer2.classList.add("form-floating", "col-10");
-  inputName.classList.add("col-4", "form-control");
+  inputContainer.classList.add("form-floating", "col-10","col-lg-4");
+  inputContainer2.classList.add("form-floating", "col-10","col-lg-4");
+  inputName.classList.add("col-10", "form-control");
   inputNameLabel.classList.add(
     "col-sm-10",
     "col-form-label",
     "col-form-label-lg"
   );
   inputDescription.classList.add("col-10", "form-control");
-  addItemBtn.classList.add("btn", "btn-primary", "btn-primary__add", "col-10");
+  addItemBtn.classList.add("btn", "btn-primary", "btn-primary__add", "col-10","col-lg-2");
   collapseBtn.classList.add("btn-primary__expand", "col");
   inputDescriptionLabel.classList.add(
     "col-sm-10",
@@ -118,14 +118,14 @@ function createForm() {
 
   footer.appendChild(form);
   form.appendChild(inputContainer);
-  form.appendChild(collapseBtn);
-  collapseBtn.appendChild(collapseBtnIcon);
   inputContainer.appendChild(inputName);
   inputContainer.appendChild(inputNameLabel);
   form.appendChild(inputContainer2);
   inputContainer2.appendChild(inputDescription);
   inputContainer2.appendChild(inputDescriptionLabel);
   form.appendChild(addItemBtn);
+  form.appendChild(collapseBtn);
+  collapseBtn.appendChild(collapseBtnIcon);
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
