@@ -19,6 +19,19 @@ const meatballs = new Item(
   "https://shared.cdn.smp.schibsted.com/v2/images/1bbc6e72-1efb-4846-8465-46f7a29553fe?fit=crop&h=846&w=1225&s=545dd735fabb69929b29483983b5b6d86106a2b8",
   false
 );
+const salad = new Item(
+  "Sallad",
+  "ej isberg",
+  "https://static.vecteezy.com/ti/gratis-foton/p1/2111164-gron-sallad-blad-pa-en-mork-gra-bakgrund-gratis-fotona.jpg",
+  false
+);
+const bread = new Item(
+  "Bröd",
+  "vitt, mjukt",
+  "https://www.hemmanytt.se/wp-content/uploads/2022/02/langjast-brod.png",
+  false
+);
+
 const shrimps = new Item(
   "Räkor",
   "frysta skalade",
@@ -26,7 +39,7 @@ const shrimps = new Item(
   true
 );
 
-let unfinishedItems = [salmon, chocolate, meatballs];
+let unfinishedItems = [salmon, chocolate, meatballs, salad, bread];
 let oldItems = [shrimps];
 
 if (
@@ -47,6 +60,7 @@ const main = document.createElement("main");
 const footer = document.createElement("footer");
 const oldItemsHeader = document.createElement("h2");
 const sortBtn = document.createElement("button");
+const sortBtnImg = document.createElement("img");
 const overlay = document.createElement("div");
 
 function createForm() {
@@ -57,12 +71,14 @@ function createForm() {
   const inputNameLabel = document.createElement("label");
   const inputDescriptionLabel = document.createElement("label");
   const inputDescription = document.createElement("input");
+  const inputFile = document.createElement("input")
   const addItemBtn = document.createElement("button");
   const collapseBtn = document.createElement("button");
   const collapseBtnIcon = document.createElement("img");
 
   let userInputName = "";
   let userInputDescription = "";
+  let userInputImage = "";
 
   inputName.value = "";
   inputDescription.value = "";
@@ -108,6 +124,10 @@ function createForm() {
   inputDescription.id = "description";
   inputDescriptionLabel.setAttribute("for", "description");
   inputDescriptionLabel.innerHTML = "Beskrivning";
+  inputFile.setAttribute("type","file")
+  inputFile.setAttribute("capture","environment")
+  inputFile.setAttribute("accept","image/*")
+
   addItemBtn.setAttribute("type", "submit");
   collapseBtn.setAttribute("type", "button");
 
@@ -123,6 +143,7 @@ function createForm() {
   form.appendChild(inputContainer2);
   inputContainer2.appendChild(inputDescription);
   inputContainer2.appendChild(inputDescriptionLabel);
+  // form.appendChild(inputFile)
   form.appendChild(addItemBtn);
   form.appendChild(collapseBtn);
   collapseBtn.appendChild(collapseBtnIcon);
@@ -131,11 +152,13 @@ function createForm() {
     e.preventDefault();
     userInputName = inputName.value;
     userInputDescription = inputDescription.value;
+    // userInputImage = inputFile.value;
 
     unfinishedItems.push(new Item(userInputName, userInputDescription));
     unfinishedUl.innerHTML = "";
     inputName.value = "";
     inputDescription.value = "";
+    // inputFile.value = "";
     createHtmlUnfinished();
     footer.classList.remove("toggleform");
     overlay.classList.remove("overlay--show");
@@ -211,6 +234,8 @@ finishedUl.classList.add("finishedlist");
 heading.innerHTML = "Inköpslista";
 sortBtn.classList.add("btn", "btn-primary", "btn-primary__sort");
 sortBtn.innerHTML = "Sortera";
+sortBtn.appendChild(sortBtnImg);
+sortBtnImg.setAttribute("src","src/sort_FILL0_wght400_GRAD0_opsz24.svg")
 oldItemsHeader.innerHTML = "Tidigare varor";
 oldItemsHeader.classList.add("olditemsheader");
 
@@ -287,7 +312,7 @@ function createHtmlOldItems() {
     const imageContainer = document.createElement("figure");
     const itemImage = document.createElement("img");
 
-    listItem.classList.add("listitem--old");
+    listItem.classList.add("listitem--old", "container");
     textWrapper.classList.add("listitem__textwrapper");
     imageContainer.classList.add("listitem__imagecontainer");
     itemName.innerHTML = item.name;
