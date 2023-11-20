@@ -58,6 +58,8 @@ function createForm() {
   const inputDescriptionLabel = document.createElement("label");
   const inputDescription = document.createElement("input");
   const addItemBtn = document.createElement("button");
+  const collapseBtn = document.createElement("button");
+  const collapseBtnIcon = document.createElement("img");
 
   let userInputName = "";
   let userInputDescription = "";
@@ -85,12 +87,14 @@ function createForm() {
     "col-form-label-lg"
   );
   inputDescription.classList.add("col-10", "form-control");
-  addItemBtn.classList.add("btn", "btn-primary", "btn-primary--add", "col-10");
+  addItemBtn.classList.add("btn", "btn-primary", "btn-primary__add", "col-10");
+  collapseBtn.classList.add("btn-primary__expand", "col");
   inputDescriptionLabel.classList.add(
     "col-sm-10",
     "col-form-label",
     "col-form-label-lg"
   );
+
   overlay.classList.add("overlay");
 
   inputName.setAttribute("placeholder", "Vara");
@@ -99,14 +103,23 @@ function createForm() {
   inputName.setAttribute("required", "");
   inputNameLabel.setAttribute("for", "name");
   inputNameLabel.innerHTML = "Jag behöver ...";
+
   inputDescription.setAttribute("placeholder", "Beskrivning");
   inputDescription.id = "description";
   inputDescriptionLabel.setAttribute("for", "description");
   inputDescriptionLabel.innerHTML = "Beskrivning";
   addItemBtn.setAttribute("type", "submit");
+  collapseBtn.setAttribute("type", "button");
+
+  collapseBtnIcon.setAttribute(
+    "src",
+    "src/expand_circle_up_FILL0_wght400_GRAD0_opsz24.svg"
+  );
 
   footer.appendChild(form);
   form.appendChild(inputContainer);
+  form.appendChild(collapseBtn);
+  collapseBtn.appendChild(collapseBtnIcon);
   inputContainer.appendChild(inputName);
   inputContainer.appendChild(inputNameLabel);
   form.appendChild(inputContainer2);
@@ -124,32 +137,71 @@ function createForm() {
     inputName.value = "";
     inputDescription.value = "";
     createHtmlUnfinished();
+    footer.classList.remove("toggleform");
+    overlay.classList.remove("overlay--show");
+    collapseBtn.classList.remove("btn-primary__expand--open");
   });
-  footer.addEventListener("mouseenter", () => {
+  // footer.addEventListener("mouseenter", () => {
+  //   footer.classList.add("toggleform");
+  //   overlay.classList.add("overlay--show");
+  //   collapseBtn.classList.add("btn-primary__expand--open");
+  // });
+
+  // footer.addEventListener("mouseleave", () => {
+  //   footer.classList.remove("toggleform");
+  //   overlay.classList.remove("overlay--show");
+  //   collapseBtn.classList.remove("btn-primary__expand--open");
+  // });
+
+  // footer.addEventListener("touchstart", () => {
+  //   footer.classList.add("toggleform");
+  //   overlay.classList.add("overlay--show");
+  //   collapseBtn.classList.toggle("btn-primary__expand--open");
+  // });
+
+  
+
+  collapseBtn.addEventListener("click", () => {
     footer.classList.toggle("toggleform");
     overlay.classList.toggle("overlay--show");
+    collapseBtn.classList.toggle("btn-primary__expand--open");
+
   });
-  footer.addEventListener("mouseleave", () => {
+  collapseBtn.addEventListener("touchstart", () => {
     footer.classList.toggle("toggleform");
     overlay.classList.toggle("overlay--show");
+    collapseBtn.classList.toggle("btn-primary__expand--open");
+
   });
 
-  inputContainer.addEventListener("touchstart", () => {
-    
+  inputContainer.addEventListener("click", () => {
     footer.classList.add("toggleform");
     overlay.classList.add("overlay--show");
+    collapseBtn.classList.add("btn-primary__expand--open");
   });
+
+  inputContainer2.addEventListener("click", () => {
+    footer.classList.add("toggleform");
+    overlay.classList.add("overlay--show");
+    collapseBtn.classList.add("btn-primary__expand--open");
+  });
+  inputContainer.addEventListener("touchstart", () => {
+    footer.classList.add("toggleform");
+    overlay.classList.add("overlay--show");
+    collapseBtn.classList.add("btn-primary__expand--open");
+  });
+
   inputContainer2.addEventListener("touchstart", () => {
     footer.classList.add("toggleform");
     overlay.classList.add("overlay--show");
+    collapseBtn.classList.add("btn-primary__expand--open");
   });
-  
 
-  footer.addEventListener("touchstart", () => {
-    footer.classList.toggle("toggleform");
-    overlay.classList.toggle("overlay--show");
-  });
- 
+  // footer.addEventListener("touchstart", () => {
+  //   footer.classList.add("toggleform");
+  //   overlay.classList.add("overlay--show");
+  //   collapseBtn.classList.toggle("btn-primary__expand--open");
+  // });
 }
 
 outerWrapper.classList.add("outerwrapper");
@@ -157,7 +209,7 @@ innerWrapper.classList.add("innerwrapper");
 unfinishedUl.classList.add("unfinishedlist");
 finishedUl.classList.add("finishedlist");
 heading.innerHTML = "Inköpslista";
-sortBtn.classList.add("btn", "btn-primary", "btn-primary--sort");
+sortBtn.classList.add("btn", "btn-primary", "btn-primary__sort");
 sortBtn.innerHTML = "Sortera";
 oldItemsHeader.innerHTML = "Tidigare varor";
 oldItemsHeader.classList.add("olditemsheader");
@@ -244,17 +296,17 @@ function createHtmlOldItems() {
     itemImage.setAttribute("alt", item.name + " " + "i min inköpslista");
 
     listItem.addEventListener("click", () => {
-      if (!overlay.classList.contains("overlay--show")){
-      item.done = false;
-      oldItems.splice(i, 1);
-      finishedUl.innerHTML = "";
-      createHtmlOldItems();
-      unfinishedItems.push(item);
-      unfinishedUl.innerHTML = "";
-      createHtmlUnfinished();
+      if (!overlay.classList.contains("overlay--show")) {
+        item.done = false;
+        oldItems.splice(i, 1);
+        finishedUl.innerHTML = "";
+        createHtmlOldItems();
+        unfinishedItems.push(item);
+        unfinishedUl.innerHTML = "";
+        createHtmlUnfinished();
 
-      console.log(unfinishedItems);
-      console.log(oldItems);
+        console.log(unfinishedItems);
+        console.log(oldItems);
       }
     });
 
@@ -283,31 +335,32 @@ function sortAllItems() {
   //       return 0;
   //     })
   //   );
-  if (!overlay.classList.contains("overlay--show")){
-  unfinishedItems.sort(function (item1, item2) {
-    if (item1.name < item2.name) {
-      return -1;
-    }
-    if (item1.name > item2.name) {
-      return 1;
-    }
-    return 0;
-  });
-  oldItems.sort(function (item1, item2) {
-    if (item1.name < item2.name) {
-      return -1;
-    }
-    if (item1.name > item2.name) {
-      return 1;
-    }
-    return 0;
-  });
+  if (!overlay.classList.contains("overlay--show")) {
+    unfinishedItems.sort(function (item1, item2) {
+      if (item1.name < item2.name) {
+        return -1;
+      }
+      if (item1.name > item2.name) {
+        return 1;
+      }
+      return 0;
+    });
+    oldItems.sort(function (item1, item2) {
+      if (item1.name < item2.name) {
+        return -1;
+      }
+      if (item1.name > item2.name) {
+        return 1;
+      }
+      return 0;
+    });
 
-  unfinishedUl.innerHTML = "";
-  createHtmlUnfinished();
-  finishedUl.innerHTML = "";
-  createHtmlOldItems();
-}}
+    unfinishedUl.innerHTML = "";
+    createHtmlUnfinished();
+    finishedUl.innerHTML = "";
+    createHtmlOldItems();
+  }
+}
 sortBtn.addEventListener("click", () => sortAllItems());
 
 createHtmlUnfinished();
