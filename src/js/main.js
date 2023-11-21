@@ -73,12 +73,13 @@ function createForm() {
   const inputDescription = document.createElement("input");
   const inputFile = document.createElement("input")
   const addItemBtn = document.createElement("button");
+  const addItemIcon = document.createElement("img");
   const collapseBtn = document.createElement("button");
   const collapseBtnIcon = document.createElement("img");
 
   let userInputName = "";
   let userInputDescription = "";
-  let userInputImage = "";
+  // let userInputImage = "";
 
   inputName.value = "";
   inputDescription.value = "";
@@ -129,6 +130,7 @@ function createForm() {
   inputFile.setAttribute("accept","image/*")
 
   addItemBtn.setAttribute("type", "submit");
+  addItemIcon.setAttribute("src","src/add_FILL0_wght400_GRAD0_opsz24.svg")
   collapseBtn.setAttribute("type", "button");
 
   collapseBtnIcon.setAttribute(
@@ -145,6 +147,7 @@ function createForm() {
   inputContainer2.appendChild(inputDescriptionLabel);
   // form.appendChild(inputFile)
   form.appendChild(addItemBtn);
+  addItemBtn.appendChild(addItemIcon)
   form.appendChild(collapseBtn);
   collapseBtn.appendChild(collapseBtnIcon);
 
@@ -255,12 +258,15 @@ function createHtmlUnfinished() {
   localStorage.setItem("unfinishedItems", JSON.stringify(unfinishedItems));
 
   unfinishedItems.forEach((item, i) => {
+    
     const textWrapper = document.createElement("section");
     const listItem = document.createElement("li");
     const itemName = document.createElement("h2");
     const itemDescription = document.createElement("p");
     const imageContainer = document.createElement("figure");
     const itemImage = document.createElement("img");
+
+    
 
     listItem.classList.add("listitem", "container");
     itemName.innerHTML = item.name;
@@ -269,6 +275,15 @@ function createHtmlUnfinished() {
     imageContainer.classList.add("listitem__imagecontainer");
     itemImage.setAttribute("src", item.image);
     itemImage.setAttribute("alt", item.name + " " + "i min inköpslista");
+  
+
+    unfinishedUl.appendChild(listItem);
+    listItem.appendChild(imageContainer);
+    imageContainer.appendChild(itemImage);
+    listItem.appendChild(textWrapper);
+    textWrapper.appendChild(itemName);
+    textWrapper.appendChild(itemDescription);
+   
 
     listItem.addEventListener("click", () => {
       if (!overlay.classList.contains("overlay--show"));
@@ -285,12 +300,7 @@ function createHtmlUnfinished() {
       }
     });
 
-    unfinishedUl.appendChild(listItem);
-    listItem.appendChild(imageContainer);
-    imageContainer.appendChild(itemImage);
-    listItem.appendChild(textWrapper);
-    textWrapper.appendChild(itemName);
-    textWrapper.appendChild(itemDescription);
+
 
     if (item.image === undefined) {
       imageContainer.innerHTML = item.name[0];
@@ -311,6 +321,9 @@ function createHtmlOldItems() {
     const itemDescription = document.createElement("p");
     const imageContainer = document.createElement("figure");
     const itemImage = document.createElement("img");
+    const statusIconContainer = document.createElement("div")
+    const statusIconText = document.createElement("span")
+    const statusIcon = document.createElement("img")
 
     listItem.classList.add("listitem--old", "container");
     textWrapper.classList.add("listitem__textwrapper");
@@ -319,6 +332,20 @@ function createHtmlOldItems() {
     itemDescription.innerHTML = item.description;
     itemImage.setAttribute("src", item.image);
     itemImage.setAttribute("alt", item.name + " " + "i min inköpslista");
+
+    statusIconContainer.classList.add("listitem--status__add")
+    statusIcon.setAttribute("src","src/add_FILL0_wght400_GRAD0_opsz24.svg")
+    statusIconText.innerText = "Lägg till"
+
+    finishedUl.appendChild(listItem);
+    listItem.appendChild(imageContainer);
+    imageContainer.appendChild(itemImage);
+    listItem.appendChild(textWrapper);
+    textWrapper.appendChild(itemName);
+    textWrapper.appendChild(itemDescription);
+    listItem.appendChild(statusIconContainer)
+    statusIconContainer.appendChild(statusIcon)
+    statusIconContainer.appendChild(statusIconText)
 
     listItem.addEventListener("click", () => {
       if (!overlay.classList.contains("overlay--show")) {
@@ -335,12 +362,7 @@ function createHtmlOldItems() {
       }
     });
 
-    finishedUl.appendChild(listItem);
-    listItem.appendChild(imageContainer);
-    imageContainer.appendChild(itemImage);
-    listItem.appendChild(textWrapper);
-    textWrapper.appendChild(itemName);
-    textWrapper.appendChild(itemDescription);
+
 
     if (item.image === undefined) {
       imageContainer.innerHTML = item.name[0];
