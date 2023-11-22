@@ -58,13 +58,13 @@ main {
     }
   }
   &__add {
-    margin-left: 0.5rem;
+    margin-left: v.$small-margin;
 
     @include mixins.center-center;
 
     img {
       width: v.$standard-value;
-      margin-left: 0.5rem;
+      margin-left: v.$small-margin;
       align-items: center;
     }
   }
@@ -134,7 +134,7 @@ ul {
   align-items: center;
   background-color: v.$primary-color;
   border-radius: 10px;
-  padding: 0.5rem v.$standard-value;
+  padding: v.$small-margin v.$standard-value;
   place-items: center;
   transition: all ease-in-out 0.3s;
   border: transparent 3px solid;
@@ -231,7 +231,7 @@ footer {
   z-index: 2;
 
   align-items: flex-start;
-  height: 5.4rem;
+  height: v.$large-height;
   overflow: hidden;
   margin-bottom: -4rem;
   transition: all 0.3s ease-in-out;
@@ -258,7 +258,7 @@ footer {
   height: 40vh;
   @include mixins.lg {
     min-height: unset;
-    height: 5.4rem;
+    height: v.$large-height;
   }
 }
 .overlay {

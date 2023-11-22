@@ -163,8 +163,9 @@ function createForm() {
     userInputDescription = inputDescription.value;
     // userInputImage = inputFile.value;
 
+    //pusha nytt objekt till lista med ofärdiga objekt och egenskapen 'done' blir 'false'
     unfinishedItems.push(
-      new Item(userInputName, userInputDescription, undefined, false)
+      new Item(userInputName, userInputDescription, undefined, false) 
     );
     unfinishedUl.innerHTML = "";
     inputName.value = "";
@@ -175,7 +176,6 @@ function createForm() {
     overlay.classList.remove("overlay--show");
     collapseBtn.classList.remove("btn-primary__expand--open");
     console.log(unfinishedItems);
-    unfinishedItems.lastIndexOf.done = false;
   });
 
   collapseBtn.addEventListener("click", () => {
@@ -324,7 +324,7 @@ function createHtmlOldItems() {
 
     listItem.addEventListener("click", () => {
       if (!overlay.classList.contains("overlay--show")) {
-        item.done = false;
+        item.done = false; //markeras som ofärdig
         oldItems.splice(i, 1);
         finishedUl.innerHTML = "";
         createHtmlOldItems();
