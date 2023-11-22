@@ -63,6 +63,16 @@ const sortBtn = document.createElement("button");
 const sortBtnImg = document.createElement("img");
 const overlay = document.createElement("div");
 
+const messageDoneWrapper = document.createElement("div")
+const messageDoneContainer = document.createElement("div");
+const messageDoneText = document.createElement("p");
+messageDoneText.innerHTML = "Klar";
+messageDoneWrapper.classList.add("message-wrapper")
+messageDoneContainer.classList.add("message-container");
+main.appendChild(messageDoneWrapper)
+messageDoneWrapper.appendChild(messageDoneContainer)
+messageDoneContainer.appendChild(messageDoneText);
+
 function createForm() {
   const form = document.createElement("form");
   const inputContainer = document.createElement("fieldset");
@@ -163,7 +173,7 @@ function createForm() {
     userInputDescription = inputDescription.value;
     // userInputImage = inputFile.value;
 
-    unfinishedItems.push(new Item(userInputName, userInputDescription));
+    unfinishedItems.push(new Item(userInputName, userInputDescription, undefined, false));
     unfinishedUl.innerHTML = "";
     inputName.value = "";
     inputDescription.value = "";
@@ -172,24 +182,10 @@ function createForm() {
     footer.classList.remove("toggleform");
     overlay.classList.remove("overlay--show");
     collapseBtn.classList.remove("btn-primary__expand--open");
+    console.log(unfinishedItems)
+    unfinishedItems.lastIndexOf.done = false
   });
-  // footer.addEventListener("mouseenter", () => {
-  //   footer.classList.add("toggleform");
-  //   overlay.classList.add("overlay--show");
-  //   collapseBtn.classList.add("btn-primary__expand--open");
-  // });
-
-  // footer.addEventListener("mouseleave", () => {
-  //   footer.classList.remove("toggleform");
-  //   overlay.classList.remove("overlay--show");
-  //   collapseBtn.classList.remove("btn-primary__expand--open");
-  // });
-
-  // footer.addEventListener("touchstart", () => {
-  //   footer.classList.add("toggleform");
-  //   overlay.classList.add("overlay--show");
-  //   collapseBtn.classList.toggle("btn-primary__expand--open");
-  // });
+ 
 
   collapseBtn.addEventListener("click", () => {
     footer.classList.toggle("toggleform");
@@ -294,6 +290,9 @@ function createHtmlUnfinished() {
         createHtmlOldItems();
         console.log(unfinishedItems);
         console.log(oldItems);
+
+        // messageDoneWrapper.classList.add("message-wrapper--done");
+        // messageDoneContainer.classList.add("message-container--done");
       }
     });
 
@@ -302,7 +301,7 @@ function createHtmlUnfinished() {
       imageContainer.classList.add("listitem__imagecontainer--noimage");
     }
   });
-  console.log(unfinishedItems);
+  // console.log(unfinishedItems);
 }
 
 function createHtmlOldItems() {
