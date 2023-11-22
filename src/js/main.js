@@ -71,7 +71,7 @@ function createForm() {
   const inputNameLabel = document.createElement("label");
   const inputDescriptionLabel = document.createElement("label");
   const inputDescription = document.createElement("input");
-  const inputFile = document.createElement("input")
+  const inputFile = document.createElement("input");
   const addItemBtn = document.createElement("button");
   const addItemIcon = document.createElement("img");
   const collapseBtn = document.createElement("button");
@@ -95,8 +95,8 @@ function createForm() {
     "col-xxl-12",
     "needs-validation"
   );
-  inputContainer.classList.add("form-floating", "col-10","col-lg-4");
-  inputContainer2.classList.add("form-floating", "col-10","col-lg-4");
+  inputContainer.classList.add("form-floating", "col-10", "col-lg-4");
+  inputContainer2.classList.add("form-floating", "col-10", "col-lg-4");
   inputName.classList.add("col-10", "form-control");
   inputNameLabel.classList.add(
     "col-sm-10",
@@ -104,7 +104,13 @@ function createForm() {
     "col-form-label-lg"
   );
   inputDescription.classList.add("col-10", "form-control");
-  addItemBtn.classList.add("btn", "btn-primary", "btn-primary__add", "col-10","col-lg-2");
+  addItemBtn.classList.add(
+    "btn",
+    "btn-primary",
+    "btn-primary__add",
+    "col-10",
+    "col-lg-2"
+  );
   collapseBtn.classList.add("btn-primary__expand", "col");
   inputDescriptionLabel.classList.add(
     "col-sm-10",
@@ -125,12 +131,12 @@ function createForm() {
   inputDescription.id = "description";
   inputDescriptionLabel.setAttribute("for", "description");
   inputDescriptionLabel.innerHTML = "Beskrivning";
-  inputFile.setAttribute("type","file")
-  inputFile.setAttribute("capture","environment")
-  inputFile.setAttribute("accept","image/*")
+  inputFile.setAttribute("type", "file");
+  inputFile.setAttribute("capture", "environment");
+  inputFile.setAttribute("accept", "image/*");
 
   addItemBtn.setAttribute("type", "submit");
-  addItemIcon.setAttribute("src","src/add_FILL0_wght400_GRAD0_opsz24.svg")
+  addItemIcon.setAttribute("src", "src/add_FILL0_wght400_GRAD0_opsz24.svg");
   collapseBtn.setAttribute("type", "button");
 
   collapseBtnIcon.setAttribute(
@@ -147,7 +153,7 @@ function createForm() {
   inputContainer2.appendChild(inputDescriptionLabel);
   // form.appendChild(inputFile)
   form.appendChild(addItemBtn);
-  addItemBtn.appendChild(addItemIcon)
+  addItemBtn.appendChild(addItemIcon);
   form.appendChild(collapseBtn);
   collapseBtn.appendChild(collapseBtnIcon);
 
@@ -185,19 +191,15 @@ function createForm() {
   //   collapseBtn.classList.toggle("btn-primary__expand--open");
   // });
 
-  
-
   collapseBtn.addEventListener("click", () => {
     footer.classList.toggle("toggleform");
     overlay.classList.toggle("overlay--show");
     collapseBtn.classList.toggle("btn-primary__expand--open");
-
   });
   collapseBtn.addEventListener("touchstart", () => {
     footer.classList.toggle("toggleform");
     overlay.classList.toggle("overlay--show");
     collapseBtn.classList.toggle("btn-primary__expand--open");
-
   });
 
   inputContainer.addEventListener("click", () => {
@@ -238,7 +240,7 @@ heading.innerHTML = "Inköpslista";
 sortBtn.classList.add("btn", "btn-primary", "btn-primary__sort");
 sortBtn.innerHTML = "Sortera";
 sortBtn.appendChild(sortBtnImg);
-sortBtnImg.setAttribute("src","src/sort_FILL0_wght400_GRAD0_opsz24.svg")
+sortBtnImg.setAttribute("src", "src/sort_FILL0_wght400_GRAD0_opsz24.svg");
 oldItemsHeader.innerHTML = "Tidigare varor";
 oldItemsHeader.classList.add("olditemsheader");
 
@@ -258,15 +260,12 @@ function createHtmlUnfinished() {
   localStorage.setItem("unfinishedItems", JSON.stringify(unfinishedItems));
 
   unfinishedItems.forEach((item, i) => {
-    
     const textWrapper = document.createElement("section");
     const listItem = document.createElement("li");
     const itemName = document.createElement("h2");
     const itemDescription = document.createElement("p");
     const imageContainer = document.createElement("figure");
     const itemImage = document.createElement("img");
-
-    
 
     listItem.classList.add("listitem", "container");
     itemName.innerHTML = item.name;
@@ -275,7 +274,6 @@ function createHtmlUnfinished() {
     imageContainer.classList.add("listitem__imagecontainer");
     itemImage.setAttribute("src", item.image);
     itemImage.setAttribute("alt", item.name + " " + "i min inköpslista");
-  
 
     unfinishedUl.appendChild(listItem);
     listItem.appendChild(imageContainer);
@@ -283,12 +281,11 @@ function createHtmlUnfinished() {
     listItem.appendChild(textWrapper);
     textWrapper.appendChild(itemName);
     textWrapper.appendChild(itemDescription);
-   
 
     listItem.addEventListener("click", () => {
       if (!overlay.classList.contains("overlay--show"));
       {
-        item.done = true;
+        item.done = true; //markeras som klar
         unfinishedItems.splice(i, 1);
         unfinishedUl.innerHTML = "";
         createHtmlUnfinished();
@@ -299,8 +296,6 @@ function createHtmlUnfinished() {
         console.log(oldItems);
       }
     });
-
-
 
     if (item.image === undefined) {
       imageContainer.innerHTML = item.name[0];
@@ -321,9 +316,9 @@ function createHtmlOldItems() {
     const itemDescription = document.createElement("p");
     const imageContainer = document.createElement("figure");
     const itemImage = document.createElement("img");
-    const statusIconContainer = document.createElement("div")
-    const statusIconText = document.createElement("span")
-    const statusIcon = document.createElement("img")
+    const statusIconContainer = document.createElement("div");
+    const statusIconText = document.createElement("span");
+    const statusIcon = document.createElement("img");
 
     listItem.classList.add("listitem--old", "container");
     textWrapper.classList.add("listitem__textwrapper");
@@ -333,9 +328,9 @@ function createHtmlOldItems() {
     itemImage.setAttribute("src", item.image);
     itemImage.setAttribute("alt", item.name + " " + "i min inköpslista");
 
-    statusIconContainer.classList.add("listitem--status__add")
-    statusIcon.setAttribute("src","src/add_FILL0_wght400_GRAD0_opsz24.svg")
-    statusIconText.innerText = "Lägg till"
+    statusIconContainer.classList.add("listitem--status__add");
+    statusIcon.setAttribute("src", "src/add_FILL0_wght400_GRAD0_opsz24.svg");
+    statusIconText.innerText = "Lägg till";
 
     finishedUl.appendChild(listItem);
     listItem.appendChild(imageContainer);
@@ -343,9 +338,9 @@ function createHtmlOldItems() {
     listItem.appendChild(textWrapper);
     textWrapper.appendChild(itemName);
     textWrapper.appendChild(itemDescription);
-    listItem.appendChild(statusIconContainer)
-    statusIconContainer.appendChild(statusIcon)
-    statusIconContainer.appendChild(statusIconText)
+    listItem.appendChild(statusIconContainer);
+    statusIconContainer.appendChild(statusIcon);
+    statusIconContainer.appendChild(statusIconText);
 
     listItem.addEventListener("click", () => {
       if (!overlay.classList.contains("overlay--show")) {
@@ -361,8 +356,6 @@ function createHtmlOldItems() {
         console.log(oldItems);
       }
     });
-
-
 
     if (item.image === undefined) {
       imageContainer.innerHTML = item.name[0];

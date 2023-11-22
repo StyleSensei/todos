@@ -14,7 +14,6 @@ p,
 
 body {
   background: v.$secondary-color;
-
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   color: whitesmoke;
   height: 100vh;
@@ -24,27 +23,24 @@ body {
 header {
   height: 4vh;
   margin-bottom: 2rem;
-  @include mixins.tablet{
-
+  @include mixins.tablet {
   }
   h1 {
     padding: 0.8rem;
     @include mixins.tablet {
       padding: 4vw 4vw;
-    
     }
   }
 }
-main{
+main {
   background: v.$linear-gradient;
-
 }
 
 .btn-primary {
   border-radius: v.$btn-border-radius;
   padding: v.$btn-padding;
   max-width: 80.33%;
-  background:v.$button-primary;
+  background: v.$button-primary;
   &__sort {
     margin: 0.8rem;
     justify-content: center;
@@ -125,7 +121,7 @@ ul {
 .olditemsheader {
   margin: 0.8rem;
   @include mixins.tablet {
-    margin: 4vw 4vw;
+    margin: 1vw 4vw;
   }
 }
 .listitem {
@@ -242,7 +238,6 @@ footer {
   overflow: hidden;
   margin-bottom: -4rem;
   transition: all 0.3s ease-in-out;
- 
 
   form {
     .form-floating.form-control {
