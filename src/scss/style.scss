@@ -15,7 +15,7 @@ p,
 body {
   background: v.$secondary-color;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  color: whitesmoke;
+  color: v.$bright-text;
   height: 100vh;
   overflow-x: hidden;
   margin: 0 auto;
@@ -28,7 +28,7 @@ header {
   h1 {
     padding: 0.8rem;
     @include mixins.tablet {
-      padding: 4vw 4vw;
+      padding: v.$large-width v.$large-width;
     }
   }
 }
@@ -43,27 +43,27 @@ main {
   background: v.$button-primary;
   &__sort {
     margin: 0.8rem;
-    justify-content: center;
-    align-items: center;
-    display: flex;
+
+    @include mixins.center-center;
+
     object-fit: contain;
     img {
       object-fit: contain;
-      margin-left: 1rem;
+      margin-left: v.$standard-value;
       width: calc(v.$expand-btn-size / 2);
     }
 
     @include mixins.tablet {
-      margin: 1vw 4vw;
+      margin: 1vw v.$large-width;
     }
   }
   &__add {
     margin-left: 0.5rem;
-    justify-content: center;
-    align-items: center;
-    display: flex;
+
+    @include mixins.center-center;
+
     img {
-      width: 1rem;
+      width: v.$standard-value;
       margin-left: 0.5rem;
       align-items: center;
     }
@@ -73,7 +73,7 @@ main {
     border-style: none;
     transition: all ease-in-out 0.7s;
     padding: 0;
-    margin-top: 1rem;
+    margin-top: v.$standard-value;
     max-width: v.$expand-btn-size;
     max-height: v.$expand-btn-size;
     position: absolute;
@@ -108,7 +108,7 @@ ul {
   }
   @include mixins.desktop {
     grid-template-columns: 1fr 1fr 1fr;
-    padding: 1rem 4vw;
+    padding: v.$standard-value v.$large-width;
   }
   @include mixins.desktopXL {
     grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -121,7 +121,7 @@ ul {
 .olditemsheader {
   margin: 0.8rem;
   @include mixins.tablet {
-    margin: 1vw 4vw;
+    margin: 1vw v.$large-width;
   }
 }
 .listitem {
@@ -134,7 +134,7 @@ ul {
   align-items: center;
   background-color: v.$primary-color;
   border-radius: 10px;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem v.$standard-value;
   place-items: center;
   transition: all ease-in-out 0.3s;
   border: transparent 3px solid;
@@ -148,7 +148,7 @@ ul {
     grid-template-columns: 1fr 3fr 1fr;
   }
   &:hover {
-    border: whitesmoke 3px solid;
+    border: v.$bright-text 3px solid;
   }
   &__imagecontainer {
     height: v.$imgsize;
@@ -176,20 +176,18 @@ ul {
     overflow: hidden;
   }
   &__textwrapper {
-    padding: 1rem 2rem;
+    padding: v.$standard-value 2rem;
   }
   &--status {
     object-fit: contain;
-    // position: relative;
-    // right: 4.3rem;
     width: auto;
     display: flex;
+    align-items: center;
     justify-content: end;
-    border: whitesmoke solid;
+    border: v.$bright-text solid;
     border-radius: 50px;
     padding: 0.1rem 0.4rem;
     font-size: small;
-    align-items: center;
 
     img {
       object-fit: contain;
@@ -197,7 +195,6 @@ ul {
       height: 2rem;
     }
     span {
-      // width: 100px;
       display: inline-block;
       margin-left: 0.25rem;
     }
@@ -224,7 +221,7 @@ ul {
 }
 footer {
   bottom: 0;
-  padding: 1rem;
+  padding: v.$standard-value;
   position: sticky;
   background-color: v.$secondary-color;
   border-top: solid 1px #45535a;
@@ -241,17 +238,17 @@ footer {
 
   form {
     .form-floating.form-control {
-      padding: 1rem 0.75rem;
+      padding: v.$standard-value 0.75rem;
       height: calc(3.5rem + 2px);
-      font-size: 1rem;
+      font-size: v.$standard-value;
 
       input {
-        font-size: 1rem !important;
+        font-size: v.$standard-value !important;
       }
     }
     .form-floating > label {
       color: #303f47;
-      padding: 1rem 1.25rem;
+      padding: v.$standard-value 1.25rem;
       opacity: 0.65;
       top: -0.2rem;
     }
@@ -259,7 +256,6 @@ footer {
 }
 .toggleform {
   height: 40vh;
-  // min-height: 300px;
   @include mixins.lg {
     min-height: unset;
     height: 5.4rem;
@@ -268,7 +264,6 @@ footer {
 .overlay {
   width: 100%;
   height: 100vh;
-  // padding:10rem;
   background-color: rgba(0, 0, 0, 0.5);
   top: 0;
   left: 0;
@@ -278,7 +273,6 @@ footer {
   z-index: 1;
   transition: all ease-in-out 0.3s;
   &--show {
-    // display:flex;
     visibility: visible;
     opacity: 1;
 
@@ -287,38 +281,3 @@ footer {
     }
   }
 }
-.message-wrapper{
-  visibility: hidden;
-  position: absolute;
-  left:0;
-  top:0;
-  text-align: center;
-  width:100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.6);
-  z-index: 3;
-  opacity: 0;
-  // transition: all ease-in-out .3s;
-  &--done{
-    visibility: visible;
-    opacity: 1;
-    animation: 3s linear 1s alternate slidein;
-    
-  }
-}
-.message-container{
-  padding: 1rem 2rem;
-  font-size: 1.5rem;
-  display: flex;
-  border-radius: 20px;
-  justify-content: center;
-  align-items: center;
-  background-color: blue;
-  &--done{
-    
-  }
-}
-

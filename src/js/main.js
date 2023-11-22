@@ -63,16 +63,6 @@ const sortBtn = document.createElement("button");
 const sortBtnImg = document.createElement("img");
 const overlay = document.createElement("div");
 
-const messageDoneWrapper = document.createElement("div")
-const messageDoneContainer = document.createElement("div");
-const messageDoneText = document.createElement("p");
-messageDoneText.innerHTML = "Klar";
-messageDoneWrapper.classList.add("message-wrapper")
-messageDoneContainer.classList.add("message-container");
-main.appendChild(messageDoneWrapper)
-messageDoneWrapper.appendChild(messageDoneContainer)
-messageDoneContainer.appendChild(messageDoneText);
-
 function createForm() {
   const form = document.createElement("form");
   const inputContainer = document.createElement("fieldset");
@@ -173,7 +163,9 @@ function createForm() {
     userInputDescription = inputDescription.value;
     // userInputImage = inputFile.value;
 
-    unfinishedItems.push(new Item(userInputName, userInputDescription, undefined, false));
+    unfinishedItems.push(
+      new Item(userInputName, userInputDescription, undefined, false)
+    );
     unfinishedUl.innerHTML = "";
     inputName.value = "";
     inputDescription.value = "";
@@ -182,10 +174,9 @@ function createForm() {
     footer.classList.remove("toggleform");
     overlay.classList.remove("overlay--show");
     collapseBtn.classList.remove("btn-primary__expand--open");
-    console.log(unfinishedItems)
-    unfinishedItems.lastIndexOf.done = false
+    console.log(unfinishedItems);
+    unfinishedItems.lastIndexOf.done = false;
   });
- 
 
   collapseBtn.addEventListener("click", () => {
     footer.classList.toggle("toggleform");
@@ -220,12 +211,6 @@ function createForm() {
     overlay.classList.add("overlay--show");
     collapseBtn.classList.add("btn-primary__expand--open");
   });
-
-  // footer.addEventListener("touchstart", () => {
-  //   footer.classList.add("toggleform");
-  //   overlay.classList.add("overlay--show");
-  //   collapseBtn.classList.toggle("btn-primary__expand--open");
-  // });
 }
 
 outerWrapper.classList.add("outerwrapper");
@@ -290,9 +275,6 @@ function createHtmlUnfinished() {
         createHtmlOldItems();
         console.log(unfinishedItems);
         console.log(oldItems);
-
-        // messageDoneWrapper.classList.add("message-wrapper--done");
-        // messageDoneContainer.classList.add("message-container--done");
       }
     });
 
@@ -301,7 +283,6 @@ function createHtmlUnfinished() {
       imageContainer.classList.add("listitem__imagecontainer--noimage");
     }
   });
-  // console.log(unfinishedItems);
 }
 
 function createHtmlOldItems() {
@@ -363,17 +344,6 @@ function createHtmlOldItems() {
   });
 }
 function sortAllItems() {
-  //   console.log(
-  //     unfinishedItems.sort(function (item1, item2) {
-  //       if (item1.name < item2.name) {
-  //         return -1;
-  //       }
-  //       if (item1.name > item2.name) {
-  //         return 1;
-  //       }
-  //       return 0;
-  //     })
-  //   );
   if (!overlay.classList.contains("overlay--show")) {
     unfinishedItems.sort(function (item1, item2) {
       if (item1.name < item2.name) {
