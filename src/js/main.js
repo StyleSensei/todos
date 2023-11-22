@@ -63,6 +63,18 @@ const sortBtn = document.createElement("button");
 const sortBtnImg = document.createElement("img");
 const overlay = document.createElement("div");
 
+
+const messageDoneWrapper = document.createElement("div")
+const messageDoneContainer = document.createElement("div");
+const messageDoneText = document.createElement("p");
+messageDoneText.innerHTML = "Klar";
+messageDoneWrapper.classList.add("message-wrapper")
+messageDoneContainer.classList.add("message-container");
+main.appendChild(messageDoneWrapper)
+messageDoneWrapper.appendChild(messageDoneContainer)
+messageDoneContainer.appendChild(messageDoneText);
+
+
 function createForm() {
   const form = document.createElement("form");
   const inputContainer = document.createElement("fieldset");
@@ -275,8 +287,17 @@ function createHtmlUnfinished() {
         createHtmlOldItems();
         console.log(unfinishedItems);
         console.log(oldItems);
+
+
+        messageDoneWrapper.classList.add("message-wrapper--done");
+        messageDoneContainer.classList.add("message-container--done");
+
       }
     });
+messageDoneWrapper.addEventListener("animationend", () => {
+  messageDoneWrapper.classList.remove("message-wrapper--done");
+  messageDoneContainer.classList.remove("message-container--done");
+})
 
     if (item.image === undefined) {
       imageContainer.innerHTML = item.name[0];

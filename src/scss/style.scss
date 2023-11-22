@@ -34,6 +34,7 @@ header {
 }
 main {
   background: v.$linear-gradient;
+
 }
 
 .btn-primary {
@@ -279,5 +280,61 @@ footer {
     @include mixins.lg() {
       display: none;
     }
+  }
+}
+
+.message-wrapper {
+  position: absolute;
+  left: 0;
+  top: 0;
+  text-align: center;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 3;
+
+  display: none;
+  opacity: 0;
+
+  &--done {
+    display: flex;
+    animation: fade .7s ease-in-out;
+  }
+}
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes moveY {
+  50% {
+    // filter: opacity(1);
+    animation-timing-function: cubic-bezier(0.02, 0.01, 0.21, 1);
+    transform: translateY(-10px);
+  }
+}
+.message-container {
+  padding: 1rem 2rem;
+  font-size: 2rem;
+  display: flex;
+  border-radius: 20px;
+  justify-content: center;
+  align-items: center;
+  background-color: blue;
+  // transform: translate(-100px, -50px);
+  &--done {
+    animation: moveY 1.5s cubic-bezier(0.02, 0.01, 0.21, 1);
   }
 }
