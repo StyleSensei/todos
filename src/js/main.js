@@ -279,6 +279,7 @@ function createHtmlUnfinished() {
       if (!overlay.classList.contains("overlay--show"));
       {
         listItem.classList.add("listitem--done");
+        document.body.classList.add("no-scroll");
         listItem.addEventListener("animationend", () => {
           item.done = true; //marked as 'done'
           unfinishedItems.splice(i, 1);
@@ -296,6 +297,7 @@ function createHtmlUnfinished() {
       }
     });
     messageDoneWrapper.addEventListener("animationend", () => {
+      document.body.classList.remove("no-scroll")
       messageDoneWrapper.classList.remove("message-wrapper--done");
       messageDoneContainer.classList.remove("message-container--done");
     });

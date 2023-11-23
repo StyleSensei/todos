@@ -57,7 +57,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
-    min-width: 250px;
+    // min-width: 200px;
     @include mixins.tablet{
         min-width: unset;
     }
@@ -71,7 +71,6 @@
     border: v.$bright-text solid;
     border-radius: 50px;
     padding: 0.1rem 0.4rem;
-    font-size: small;
     max-width: 93px ;
 
     img {
@@ -93,7 +92,7 @@
     }
   }
 &--done{
-    animation: moveItem .7s cubic-bezier(0.02, 0.01, 0.21, 1);
+    animation: moveItem .3s cubic-bezier(0.02, 0.01, 0.21, 1);
 }
   &--old {
     @extend .listitem;
