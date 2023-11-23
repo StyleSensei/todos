@@ -49,6 +49,10 @@ if (
   unfinishedItems = JSON.parse(localStorage.getItem("unfinishedItems"));
   oldItems = JSON.parse(localStorage.getItem("oldItems"));
 }
+localStorage.setItem("unfinishedItems", JSON.stringify(unfinishedItems));
+localStorage.setItem("oldItems", JSON.stringify(oldItems));
+
+
 
 const outerWrapper = document.createElement("div");
 const innerWrapper = document.createElement("div");
@@ -211,6 +215,7 @@ function createForm() {
     footer.classList.remove("toggleform");
     overlay.classList.remove("overlay--show");
     collapseBtn.classList.remove("btn-primary__expand--open");
+
     console.log(unfinishedItems);
   });
 
