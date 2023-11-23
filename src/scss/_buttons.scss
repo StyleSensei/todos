@@ -1,0 +1,47 @@
+@use "variables" as v;
+@use "mixins";
+
+.btn-primary {
+    border-radius: v.$btn-border-radius;
+    padding: v.$btn-padding;
+    max-width: 80.33%;
+    background: v.$button-primary;
+    &__sort {
+      margin: 0.8rem;
+      @include mixins.desktop {
+        margin-right: v.$large;
+      }
+      @include mixins.center-center;
+      img {
+        margin-left: v.$standard-value;
+        width: calc(v.$expand-btn-size / 2);
+      }
+    }
+  
+    &__add {
+      margin-left: v.$small-margin;
+      @include mixins.center-center;
+      img {
+        width: v.$standard-value;
+        margin-left: v.$small-margin;
+      }
+    }
+    &__expand {
+      background-color: transparent;
+      border-style: none;
+      position: absolute;
+      padding: 0;
+      right: 3%;
+      top: 0;
+      margin-top: v.$standard-value;
+      max-width: v.$expand-btn-size;
+      max-height: v.$expand-btn-size;
+      transition: all ease-in-out 0.7s;
+      @include mixins.lg {
+        display: none;
+      }
+      &--open {
+        transform: rotate(180deg);
+      }
+    }
+  }

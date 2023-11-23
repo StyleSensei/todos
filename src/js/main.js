@@ -171,7 +171,7 @@ function createForm() {
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-    userInputName = inputName.value;
+    userInputName = inputName.value.charAt(0).toUpperCase() + inputName.value.slice(1);
     userInputDescription = inputDescription.value;
     // userInputImage = inputFile.value;
 
@@ -244,7 +244,7 @@ innerWrapper.appendChild(header);
 innerWrapper.appendChild(main);
 innerWrapper.appendChild(footer);
 header.appendChild(heading);
-main.appendChild(sortBtn);
+header.appendChild(sortBtn);
 main.appendChild(unfinishedUl);
 main.appendChild(oldItemsHeader);
 main.appendChild(finishedUl);
@@ -329,7 +329,7 @@ function createHtmlOldItems() {
     itemImage.setAttribute("src", item.image);
     itemImage.setAttribute("alt", item.name + " " + "i min inköpslista");
 
-    statusIconContainer.classList.add("listitem--status__add");
+    statusIconContainer.classList.add("listitem__status--add");
     statusIcon.setAttribute("src", "src/add_FILL0_wght400_GRAD0_opsz24.svg");
     statusIconText.innerText = "Lägg till";
 

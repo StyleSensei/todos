@@ -1,5 +1,9 @@
 @use "mixins";
 @use "variables" as v;
+@use "keyframes";
+@use "form";
+@use "buttons";
+@use "listitem";
 
 // reset
 *,
@@ -11,7 +15,9 @@ p,
   padding: 0;
   margin-bottom: 0;
 }
-
+p {
+  width: 100%;
+}
 body {
   background: v.$secondary-color;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -21,91 +27,49 @@ body {
   margin: 0 auto;
 }
 header {
-  height: 4vh;
-  margin-bottom: 2rem;
-  @include mixins.tablet {
-  }
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  background-color: v.$secondary-color;
+  height: auto;
+  width: 100vw;
+  z-index: 1;
+
   h1 {
     padding: 0.8rem;
     @include mixins.tablet {
-      padding: v.$large-width v.$large-width;
+      padding: 1rem;
+    }
+    @include mixins.desktop {
+      padding: v.$large-padding;
     }
   }
 }
 main {
+  margin-top: 5rem;
+  padding-top: 1rem;
   background: v.$linear-gradient;
-
-}
-
-.btn-primary {
-  border-radius: v.$btn-border-radius;
-  padding: v.$btn-padding;
-  max-width: 80.33%;
-  background: v.$button-primary;
-  &__sort {
-    margin: 0.8rem;
-
-    @include mixins.center-center;
-
-    object-fit: contain;
-    img {
-      object-fit: contain;
-      margin-left: v.$standard-value;
-      width: calc(v.$expand-btn-size / 2);
-    }
-
-    @include mixins.tablet {
-      margin: 1vw v.$large-width;
-    }
-  }
-  &__add {
-    margin-left: v.$small-margin;
-
-    @include mixins.center-center;
-
-    img {
-      width: v.$standard-value;
-      margin-left: v.$small-margin;
-      align-items: center;
-    }
-  }
-  &__expand {
-    background-color: transparent;
-    border-style: none;
-    transition: all ease-in-out 0.7s;
-    padding: 0;
-    margin-top: v.$standard-value;
-    max-width: v.$expand-btn-size;
-    max-height: v.$expand-btn-size;
-    position: absolute;
-    right: 3%;
-    top: 0;
-    @include mixins.lg {
-      display: none;
-    }
-    &--open {
-      transform: rotate(180deg);
-    }
+  min-height: 70vh;
+  transition: all 0.3s;
+  height: 100%;
+  @include mixins.desktop {
+    padding-top: 5rem;
   }
 }
 
-.outerwrapper {
-  height: 100vh;
-}
 .innerwrapper {
   display: grid;
-  height: 100vh;
 }
 
 ul {
   display: grid;
   grid-template-columns: 1fr;
-  flex-wrap: wrap;
+  grid-template-rows: 1fr 1fr 1fr;
   gap: 10px;
-  padding: 0.8rem;
-
+  padding: v.$standard-value;
   @include mixins.tablet {
     grid-template-columns: 1fr 1fr;
+    margin-bottom: 2rem;
   }
   @include mixins.desktop {
     grid-template-columns: 1fr 1fr 1fr;
@@ -116,171 +80,28 @@ ul {
   }
 }
 
-.unfinishedlist {
-  margin-bottom: 4rem;
-}
 .olditemsheader {
-  margin: 0.8rem;
+  margin: v.$standard-value;
   @include mixins.tablet {
     margin: 1vw v.$large-width;
   }
 }
-.listitem {
-  cursor: pointer;
-  display: grid;
-  grid-template-columns: 1fr 3fr 1fr;
-  grid-template-rows: 6rem;
-  justify-content: stretch;
-  width: v.$itemwidth;
-  align-items: center;
-  background-color: v.$primary-color;
-  border-radius: 10px;
-  padding: v.$small-margin v.$standard-value;
-  place-items: center;
-  transition: all ease-in-out 0.3s;
-  border: transparent 3px solid;
-  box-shadow: 0px 5px 50px #0043653e;
-  @include mixins.tablet() {
-    font-size: small;
-    grid-template-columns: 1fr 10rem 1fr;
-  }
-  @include mixins.desktop() {
-    font-size: small;
-    grid-template-columns: 1fr 3fr 1fr;
-  }
-  &:hover {
-    border: v.$bright-text 3px solid;
-  }
-  &__imagecontainer {
-    height: v.$imgsize;
-    margin: 0;
-    &--noimage {
-      position: relative;
-      width: v.$imgsize;
-      font-weight: 900;
-      height: v.$imgsize;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
-        sans-serif;
-      text-align: center;
-      top: 0.35rem;
-      line-height: 4rem;
-      font-size: 5rem;
-      text-transform: capitalize;
-    }
-  }
-  img {
-    width: v.$imgsize;
-    border-radius: 50px;
-    height: v.$imgsize;
-    object-fit: cover;
-    overflow: hidden;
-  }
-  &__textwrapper {
-    padding: v.$standard-value 2rem;
-  }
-  &--status {
-    object-fit: contain;
-    width: auto;
-    display: flex;
-    align-items: center;
-    justify-content: end;
-    border: v.$bright-text solid;
-    border-radius: 50px;
-    padding: 0.1rem 0.4rem;
-    font-size: small;
 
-    img {
-      object-fit: contain;
-      width: 30px;
-      height: 2rem;
-    }
-    span {
-      display: inline-block;
-      margin-left: 0.25rem;
-    }
-  }
-  &--status__add {
-    @extend .listitem--status;
-    right: 2rem;
-    img {
-      height: 1.5rem;
-    }
-  }
-
-  &--old {
-    @extend .listitem;
-    background-color: rgba(0, 0, 0, 0.2);
-    filter: grayscale(1);
-    border: dashed 3px;
-    transition: all 0.3s ease-in-out;
-    &:hover {
-      border: solid 3px;
-      background-color: v.$secondary-color;
-    }
-  }
-}
 footer {
   bottom: 0;
   padding: v.$standard-value;
-  position: sticky;
+  position: fixed;
+  width: 100vw;
   background-color: v.$secondary-color;
   border-top: solid 1px #45535a;
   display: -webkit-box;
   display: flex;
   justify-content: center;
   z-index: 2;
-
   align-items: flex-start;
   height: v.$large-height;
   overflow: hidden;
-  margin-bottom: -4rem;
-  transition: all 0.3s ease-in-out;
-
-  form {
-    .form-floating.form-control {
-      padding: v.$standard-value 0.75rem;
-      height: calc(3.5rem + 2px);
-      font-size: v.$standard-value;
-
-      input {
-        font-size: v.$standard-value !important;
-      }
-    }
-    .form-floating > label {
-      color: #303f47;
-      padding: v.$standard-value 1.25rem;
-      opacity: 0.65;
-      top: -0.2rem;
-    }
-  }
-}
-.toggleform {
-  height: 40vh;
-  @include mixins.lg {
-    min-height: unset;
-    height: v.$large-height;
-  }
-}
-.overlay {
-  width: 100%;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
-  top: 0;
-  left: 0;
-  position: fixed;
-  opacity: 0;
-  visibility: hidden;
-  z-index: 1;
-  transition: all ease-in-out 0.3s;
-  &--show {
-    visibility: visible;
-    opacity: 1;
-
-    @include mixins.lg() {
-      display: none;
-    }
-  }
+  transition: height 0.3s ease-in-out;
 }
 
 .message-wrapper {
@@ -297,34 +118,12 @@ footer {
 
   display: none;
   opacity: 0;
-
   &--done {
     display: flex;
-    animation: fade .7s ease-in-out;
-  }
-}
-@keyframes fade {
-  0% {
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  80% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
+    animation: fade 0.7s ease-in-out;
   }
 }
 
-@keyframes moveY {
-  50% {
-    // filter: opacity(1);
-    animation-timing-function: cubic-bezier(0.02, 0.01, 0.21, 1);
-    transform: translateY(-10px);
-  }
-}
 .message-container {
   padding: 1rem 2rem;
   font-size: 2rem;

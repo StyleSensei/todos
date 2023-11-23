@@ -1,10 +1,16 @@
 $itemwidth: 100%;
 $imgsize: 5rem;
 $btn-border-radius: 5px;
+
 $btn-padding: 0.5rem 1rem;
+$btn-padding-small: 0.5rem;
 $expand-btn-size: 60px;
-$standard-value: 1rem;
-$large-width: 4vw;
+
+$standard-value: .8rem;
+$large: 4vw!important;
+
+$large-padding: 1vw $large;
+$large-width: $large;
 $small-margin: 0.5rem;
 $large-height: 5.4rem;
 
