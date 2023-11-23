@@ -62,18 +62,41 @@ const oldItemsHeader = document.createElement("h2");
 const sortBtn = document.createElement("button");
 const sortBtnImg = document.createElement("img");
 const overlay = document.createElement("div");
-
-
-const messageDoneWrapper = document.createElement("div")
+const messageDoneWrapper = document.createElement("div");
 const messageDoneContainer = document.createElement("div");
 const messageDoneText = document.createElement("p");
-messageDoneText.innerHTML = "Klar";
-messageDoneWrapper.classList.add("message-wrapper")
+
+messageDoneWrapper.classList.add("message-wrapper");
 messageDoneContainer.classList.add("message-container");
-main.appendChild(messageDoneWrapper)
-messageDoneWrapper.appendChild(messageDoneContainer)
+outerWrapper.classList.add("outerwrapper");
+innerWrapper.classList.add("innerwrapper");
+unfinishedUl.classList.add("unfinishedlist");
+finishedUl.classList.add("finishedlist");
+oldItemsHeader.classList.add("olditemsheader");
+sortBtn.classList.add("btn", "btn-primary", "btn-primary__sort");
+sortBtnImg.setAttribute("src", "src/sort_FILL0_wght400_GRAD0_opsz24.svg");
+
+main.appendChild(messageDoneWrapper);
+messageDoneWrapper.appendChild(messageDoneContainer);
 messageDoneContainer.appendChild(messageDoneText);
 
+messageDoneText.innerHTML = "Klar";
+heading.innerHTML = "Inköpslista";
+sortBtn.innerHTML = "Sortera";
+oldItemsHeader.innerHTML = "Tidigare varor";
+
+sortBtn.appendChild(sortBtnImg);
+document.body.appendChild(overlay);
+document.body.appendChild(outerWrapper);
+outerWrapper.appendChild(innerWrapper);
+innerWrapper.appendChild(header);
+innerWrapper.appendChild(main);
+innerWrapper.appendChild(footer);
+header.appendChild(heading);
+header.appendChild(sortBtn);
+main.appendChild(unfinishedUl);
+main.appendChild(oldItemsHeader);
+main.appendChild(finishedUl);
 
 function createForm() {
   const form = document.createElement("form");
@@ -171,13 +194,14 @@ function createForm() {
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-    userInputName = inputName.value.charAt(0).toUpperCase() + inputName.value.slice(1);
+    userInputName =
+      inputName.value.charAt(0).toUpperCase() + inputName.value.slice(1);
     userInputDescription = inputDescription.value;
     // userInputImage = inputFile.value;
 
     //pusha nytt objekt till lista med ofärdiga objekt och egenskapen 'done' blir 'false'
     unfinishedItems.push(
-      new Item(userInputName, userInputDescription, undefined, false) 
+      new Item(userInputName, userInputDescription, undefined, false)
     );
     unfinishedUl.innerHTML = "";
     inputName.value = "";
@@ -225,30 +249,6 @@ function createForm() {
   });
 }
 
-outerWrapper.classList.add("outerwrapper");
-innerWrapper.classList.add("innerwrapper");
-unfinishedUl.classList.add("unfinishedlist");
-finishedUl.classList.add("finishedlist");
-heading.innerHTML = "Inköpslista";
-sortBtn.classList.add("btn", "btn-primary", "btn-primary__sort");
-sortBtn.innerHTML = "Sortera";
-sortBtn.appendChild(sortBtnImg);
-sortBtnImg.setAttribute("src", "src/sort_FILL0_wght400_GRAD0_opsz24.svg");
-oldItemsHeader.innerHTML = "Tidigare varor";
-oldItemsHeader.classList.add("olditemsheader");
-
-document.body.appendChild(overlay);
-document.body.appendChild(outerWrapper);
-outerWrapper.appendChild(innerWrapper);
-innerWrapper.appendChild(header);
-innerWrapper.appendChild(main);
-innerWrapper.appendChild(footer);
-header.appendChild(heading);
-header.appendChild(sortBtn);
-main.appendChild(unfinishedUl);
-main.appendChild(oldItemsHeader);
-main.appendChild(finishedUl);
-
 function createHtmlUnfinished() {
   localStorage.setItem("unfinishedItems", JSON.stringify(unfinishedItems));
 
@@ -278,26 +278,27 @@ function createHtmlUnfinished() {
     listItem.addEventListener("click", () => {
       if (!overlay.classList.contains("overlay--show"));
       {
-        item.done = true; //markeras som klar
-        unfinishedItems.splice(i, 1);
-        unfinishedUl.innerHTML = "";
-        createHtmlUnfinished();
-        oldItems.push(item);
-        finishedUl.innerHTML = "";
-        createHtmlOldItems();
-        console.log(unfinishedItems);
-        console.log(oldItems);
-
+        listItem.classList.add("listitem--done");
+        listItem.addEventListener("animationend", () => {
+          item.done = true; //marked as 'done'
+          unfinishedItems.splice(i, 1);
+          unfinishedUl.innerHTML = "";
+          createHtmlUnfinished();
+          oldItems.push(item);
+          finishedUl.innerHTML = "";
+          createHtmlOldItems();
+          console.log(unfinishedItems);
+          console.log(oldItems);
+        });
 
         messageDoneWrapper.classList.add("message-wrapper--done");
         messageDoneContainer.classList.add("message-container--done");
-
       }
     });
-messageDoneWrapper.addEventListener("animationend", () => {
-  messageDoneWrapper.classList.remove("message-wrapper--done");
-  messageDoneContainer.classList.remove("message-container--done");
-})
+    messageDoneWrapper.addEventListener("animationend", () => {
+      messageDoneWrapper.classList.remove("message-wrapper--done");
+      messageDoneContainer.classList.remove("message-container--done");
+    });
 
     if (item.image === undefined) {
       imageContainer.innerHTML = item.name[0];

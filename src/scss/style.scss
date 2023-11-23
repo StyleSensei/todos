@@ -29,9 +29,10 @@ body {
 header {
   position: fixed;
   display: flex;
+  align-items: center;
   justify-content: space-between;
   background-color: v.$secondary-color;
-  height: auto;
+  height: 5rem;
   width: 100vw;
   z-index: 1;
 
@@ -113,7 +114,7 @@ footer {
   height: 100vh;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.6);
   z-index: 3;
 
   display: none;
@@ -131,7 +132,7 @@ footer {
   border-radius: 20px;
   justify-content: center;
   align-items: center;
-  background-color: blue;
+  background-color: v.$button-primary;
   // transform: translate(-100px, -50px);
   &--done {
     animation: moveY 1.5s cubic-bezier(0.02, 0.01, 0.21, 1);

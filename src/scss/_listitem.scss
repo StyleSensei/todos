@@ -1,5 +1,6 @@
 @use "variables" as v;
 @use "mixins";
+@use "keyframes";
 
 .listitem {
   cursor: pointer;
@@ -71,6 +72,7 @@
     border-radius: 50px;
     padding: 0.1rem 0.4rem;
     font-size: small;
+    max-width: 93px ;
 
     img {
       object-fit: contain;
@@ -90,7 +92,9 @@
       height: 1.5rem;
     }
   }
-
+&--done{
+    animation: moveItem .7s cubic-bezier(0.02, 0.01, 0.21, 1);
+}
   &--old {
     @extend .listitem;
     justify-content: space-between;
