@@ -1,25 +1,35 @@
+// size & spacing
 $itemwidth: 100%;
 $imgsize: 5rem;
-$btn-border-radius: 5px;
 
-$btn-padding: 0.5rem 1rem;
-$btn-padding-small: 0.5rem;
+$btn-border-radius: 5px;
 $expand-btn-size: 60px;
 
 $standard-value: .8rem;
+$medium: 5rem;
 $large: 4vw!important;
 
+$btn-padding: 0.5rem 1rem;
+$btn-padding-small: 0.5rem;
 $large-padding: 1vw $large;
+
 $large-width: $large;
 $small-margin: 0.5rem;
 $large-height: 5.4rem;
+
+$columns-1: 1fr;
+$columns-2: 1fr 1fr;
+$columns-3: 1fr 1fr 1fr;
+$columns-4: 1fr 1fr 1fr 1fr;
 
 // colors
 $primary-color:#f6545a;
 $secondary-color:#303f47;
 $linear-gradient: linear-gradient(45deg, #e66465, #9198e5);
 $button-primary:rgb(93, 98, 254);
-$bright-text : whitesmoke;
+$bright-text: whitesmoke;
+$overlay-dark:  rgba(0, 0, 0, 0.5);
+$overlay-darker:  rgba(0, 0, 0, 0.6);
 
 //breakpoints
 $tablet:768px;

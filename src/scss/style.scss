@@ -32,14 +32,14 @@ header {
   align-items: center;
   justify-content: space-between;
   background-color: v.$secondary-color;
-  height: 5rem;
+  height: v.$medium;
   width: 100vw;
   z-index: 1;
 
   h1 {
-    padding: 0.8rem;
+    padding: v.$standard-value;
     @include mixins.tablet {
-      padding: 1rem;
+      padding: v.$standard-value;
     }
     @include mixins.desktop {
       padding: v.$large-padding;
@@ -47,14 +47,14 @@ header {
   }
 }
 main {
-  margin-top: 5rem;
-  padding-top: 1rem;
+  margin-top: v.$medium;
+  padding-top: v.$standard-value;
   background: v.$linear-gradient;
   min-height: 70vh;
   transition: all 0.3s;
   height: 100%;
   @include mixins.desktop {
-    padding-top: 5rem;
+    padding-top: v.$medium;
   }
 }
 
@@ -114,7 +114,7 @@ footer {
   height: 100vh;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: v.$overlay-darker;
   z-index: 3;
 
   display: none;
@@ -126,7 +126,7 @@ footer {
 }
 
 .message-container {
-  padding: 1rem 2rem;
+  padding: v.$standard-value 2rem;
   font-size: 2rem;
   display: flex;
   border-radius: 20px;
