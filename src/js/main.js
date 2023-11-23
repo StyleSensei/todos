@@ -216,6 +216,13 @@ function createForm() {
     overlay.classList.remove("overlay--show");
     collapseBtn.classList.remove("btn-primary__expand--open");
 
+const theNewItem = document.querySelector(".unfinishedlist li:last-child")
+theNewItem.classList.add("listitem--new")
+console.log(document.querySelector(".unfinishedlist:last-child"))
+document.querySelector(".listitem--new").addEventListener("animationend",() => {
+console.log(document.querySelector("listitem"))
+document.querySelector(".unfinishedlist li:last-child").classList.remove("listitem--new")
+})
     console.log(unfinishedItems);
   });
 
