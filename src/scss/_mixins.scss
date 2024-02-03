@@ -1,0 +1,27 @@
+@use 'variables' as v;
+
+@mixin tablet {
+    @media screen and (min-width: v.$tablet) {
+      @content;
+    }
+  }
+  @mixin lg {
+    @media screen and (min-width: v.$lg) {
+      @content;
+    }
+  }
+  @mixin desktop {
+    @media screen and (min-width: v.$desktop) {
+      @content;
+    }
+  }
+  @mixin desktopXL {
+    @media screen and (min-width: v.$desktopXL) {
+      @content;
+    }
+  }
+  @mixin center-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }

@@ -1,0 +1,113 @@
+@use "variables" as v;
+@use "mixins";
+@use "keyframes";
+
+.listitem {
+  cursor: pointer;
+  display: flex;
+
+  justify-content: stretch;
+  width: v.$itemwidth;
+  align-items: center;
+  background-color: v.$primary-color;
+  border-radius: 10px;
+  padding: v.$small-margin v.$standard-value;
+  place-items: center;
+  transition: all ease-in-out 0.3s;
+  border: transparent 3px solid;
+  box-shadow: 0px 5px 50px #0043653e;
+  @include mixins.tablet() {
+    font-size: small;
+    grid-template-columns: 1fr 10rem 1fr;
+  }
+  @include mixins.desktop() {
+    font-size: small;
+    grid-template-columns: 1fr 3fr 1fr;
+  }
+  &:hover {
+    border: v.$bright-text 3px solid;
+  }
+  &__imagecontainer {
+    height: v.$imgsize;
+    margin: 0;
+    &--noimage {
+      position: relative;
+      width: v.$imgsize;
+      font-weight: 900;
+      height: v.$imgsize;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+        sans-serif;
+      text-align: center;
+      top: 0.35rem;
+      line-height: 4rem;
+      font-size: 5rem;
+      text-transform: capitalize;
+    }
+  }
+  img {
+    width: v.$imgsize;
+    border-radius: 50px;
+    height: v.$imgsize;
+    object-fit: cover;
+    overflow: hidden;
+  }
+  &__textwrapper {
+    padding: v.$standard-value calc(2 * v.$standard-value);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    // min-width: 200px;
+    @include mixins.tablet{
+        min-width: unset;
+    }
+  }
+  &__status {
+    object-fit: contain;
+    width: auto;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    border: v.$bright-text solid;
+    border-radius: 50px;
+    padding: 0.1rem 0.4rem;
+    max-width: 93px ;
+
+    img {
+      object-fit: contain;
+      width: 30px;
+      height: calc(2 * v.$standard-value);
+    }
+    span {
+      display: inline-block;
+      margin-left: 0.25rem;
+    }
+  }
+  &__status--add {
+    @extend .listitem__status;
+    right: calc(2 * v.$standard-value);
+    padding: v.$btn-padding-small;
+    img {
+      height: 1.5rem;
+    }
+  }
+&--done{
+    animation: moveItem .3s cubic-bezier(0.02, 0.01, 0.21, 1);
+}
+&--new{
+    animation: moveItem .3s cubic-bezier(0.02, 0.01, 0.21, 1) reverse;
+}
+  &--old {
+    @extend .listitem;
+    justify-content: space-between;
+    grid-template-rows: calc(6 * v.$standard-value);
+    background-color: rgba(0, 0, 0, 0.2);
+    filter: grayscale(1);
+    border: dashed 3px;
+    transition: all 0.3s ease-in-out;
+    &:hover {
+      border: solid 3px;
+      background-color: v.$secondary-color;
+    }
+  }
+}

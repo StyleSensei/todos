@@ -1,0 +1,147 @@
+@use "mixins";
+@use "variables" as v;
+@use "keyframes";
+@use "form";
+@use "buttons";
+@use "listitem";
+
+// reset
+*,
+p,
+:before,
+:after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  margin-bottom: 0;
+}
+p {
+  width: 100%;
+}
+body {
+  background: v.$secondary-color;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: v.$bright-text;
+  height: 100vh;
+  overflow-x: hidden;
+  margin: 0 auto;
+}
+.no-scroll{
+  overflow: hidden;
+}
+
+header {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: v.$secondary-color;
+  height: v.$medium;
+  width: 100vw;
+  z-index: 1;
+
+  h1 {
+    padding: v.$standard-value;
+    @include mixins.tablet {
+      padding: v.$standard-value;
+    }
+    @include mixins.desktop {
+      padding: v.$large-padding;
+    }
+  }
+}
+main {
+  margin-top: v.$medium;
+  padding-top: v.$standard-value;
+  background: v.$linear-gradient;
+  min-height: 80vh;
+  transition: all 0.3s;
+  height: 100%;
+  @include mixins.desktop {
+    padding-top: v.$medium;
+  }
+}
+
+.innerwrapper {
+  display: grid;
+}
+
+ul {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 10px;
+  padding: v.$standard-value;
+  @include mixins.tablet {
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: 2rem;
+  }
+  @include mixins.desktop {
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: v.$standard-value v.$large-width;
+  }
+  @include mixins.desktopXL {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
+
+.olditemsheader {
+  margin: v.$standard-value;
+  @include mixins.tablet {
+    margin: 1vw v.$large-width;
+  }
+}
+
+footer {
+  bottom: 0;
+  padding: v.$standard-value;
+  position: fixed;
+  width: 100vw;
+  background-color: v.$secondary-color;
+  border-top: solid 1px #45535a;
+  display: -webkit-box;
+  display: flex;
+  justify-content: center;
+  z-index: 2;
+  align-items: flex-start;
+  height: v.$large-height;
+  overflow: hidden;
+  transition: height 0.3s ease-in-out;
+}
+
+.message-wrapper {
+  position: fixed;
+  display: flex;
+  left: 0;
+  top: 0;
+  text-align: center;
+  width: 100vw;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  background-color: v.$overlay-darker;
+  z-index: 3;
+
+  display: none;
+  opacity: 0;
+  &--done {
+    display: flex;
+    animation: fade .5s ease-in-out;
+  }
+}
+
+.message-container {
+  position: relative;
+  // top: 50vh;
+  padding: v.$standard-value 2rem;
+  font-size: 2rem;
+  display: flex;
+  border-radius: 20px;
+  justify-content: center;
+  align-items: center;
+  background-color: v.$button-primary;
+  // transform: translate(-100px, -50px);
+  &--done {
+    animation: moveY .5s cubic-bezier(0.02, 0.01, 0.21, 1);
+  }
+}

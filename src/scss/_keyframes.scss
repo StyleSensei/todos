@@ -1,0 +1,35 @@
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes moveY {
+  100% {
+    // filter: opacity(1);
+
+    animation-timing-function: cubic-bezier(0.02, 0.01, 0.21, 1);
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes moveItem {
+  50% {
+    transform: translateX(1vw);
+  }
+
+  100% {
+    animation-timing-function: cubic-bezier(0.02, 0.01, 0.21, 1);
+    transform: translateX(5vw);
+    transform: translateY(60vh);
+  }
+}
