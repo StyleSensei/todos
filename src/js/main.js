@@ -78,7 +78,7 @@ unfinishedUl.classList.add("unfinishedlist");
 finishedUl.classList.add("finishedlist");
 oldItemsHeader.classList.add("olditemsheader");
 sortBtn.classList.add("btn", "btn-primary", "btn-primary__sort");
-sortBtnImg.setAttribute("src", "src/sort_FILL0_wght400_GRAD0_opsz24.svg");
+sortBtnImg.setAttribute("src", "./assets/media/sort_FILL0_wght400_GRAD0_opsz24.svg");
 
 main.appendChild(messageDoneWrapper);
 messageDoneWrapper.appendChild(messageDoneContainer);
@@ -175,12 +175,12 @@ function createForm() {
   inputFile.setAttribute("accept", "image/*");
 
   addItemBtn.setAttribute("type", "submit");
-  addItemIcon.setAttribute("src", "src/add_FILL0_wght400_GRAD0_opsz24.svg");
+  addItemIcon.setAttribute("src", "./assets/media/add_FILL0_wght400_GRAD0_opsz24.svg");
   collapseBtn.setAttribute("type", "button");
 
   collapseBtnIcon.setAttribute(
     "src",
-    "src/expand_circle_up_FILL0_wght400_GRAD0_opsz24.svg"
+    "./assets/media/expand_circle_up_FILL0_wght400_GRAD0_opsz24.svg"
   );
 
   footer.appendChild(form);
@@ -345,7 +345,7 @@ function createHtmlOldItems() {
     itemImage.setAttribute("alt", item.name + " " + "i min inköpslista");
 
     statusIconContainer.classList.add("listitem__status--add");
-    statusIcon.setAttribute("src", "src/add_FILL0_wght400_GRAD0_opsz24.svg");
+    statusIcon.setAttribute("src", "./assets/media/add_FILL0_wght400_GRAD0_opsz24.svg");
     statusIconText.innerText = "Lägg till";
 
     finishedUl.appendChild(listItem);
